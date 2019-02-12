@@ -31,7 +31,8 @@ PP2RecordingContext >> gtTallyFor: composite [
 		column: 'Strategy' evaluated: [ :each | each first displayName ];
 		column: 'Count' evaluated: [ :each | each second printString ];
 		column: 'Percentage (%)' evaluated: [ :each | each third printString ];
-		items: [ self asFrequencyTable ]
+		items: [ self asFrequencyTable ];
+		send: #first
 		"selectionAct: [ :list :context | list selection first inspect] on: $i entitled: 'Inspect (i)';
 		act: [ :p :ctx | ctx asFrequencyTable inspect ] icon: GLMUIThemeExtraIcons glamorousInspect entitled: 'Inspect';
 		showOnly: 50"
