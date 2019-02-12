@@ -6,6 +6,9 @@ GtMethodCoder >> petitParserProductionAstFor: anAST [
 	(anAST notNil and: [ anAST methodClass inheritsFrom: PP2CompositeNode ])
 		ifFalse: [ 
 			addOns removeStylerOfType: GtCoderExpandablePetitParserProductionStyler.
+			addOns removeContextAction: 'Inspect parser' translated.
 			^ self ].
-	addOns addStyler: GtCoderExpandablePetitParserProductionStyler new
+	addOns addStyler: GtCoderExpandablePetitParserProductionStyler new.
+	addOns addContextAction: 'Inspect parser' translated icon: BrGlamorousIcons inspect action: [ :button | 
+		button phlow spawnObject: (anAST methodClass new perform: anAST selector) ]
 ]
