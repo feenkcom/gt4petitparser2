@@ -61,7 +61,7 @@ PP2Node >> gtTreeFor: aView [
 					text: each gtDisplayString asRopedText;
 					when: BlClickEvent do: [:event | event target phlow spawnObject: each]
 		];
-			with: (self withDeepCollect: #children).
+			with: (self withDeepCollect: #children as: Set).
 		m edges 
 			stencil: [ 
 				BlParabollaArcElement new
