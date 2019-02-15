@@ -28,7 +28,7 @@ PP2RecordingContext >> gtTallyFor: composite [
 	<gtView>
 	^ composite columnedList 
 		title: 'Global Tally';
-		column: 'Strategy' evaluated: [ :each | each first displayName ];
+		column: 'Strategy' evaluated: [ :each | each first gtDisplayString ];
 		column: 'Count' evaluated: [ :each | each second printString ];
 		column: 'Percentage (%)' evaluated: [ :each | each third printString ];
 		items: [ self asFrequencyTable ];

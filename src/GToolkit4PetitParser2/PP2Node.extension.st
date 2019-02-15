@@ -1,6 +1,23 @@
 Extension { #name : #PP2Node }
 
 { #category : #'*GToolkit4PetitParser2' }
+PP2Node >> gtChildrenFor: aView [
+	<gtView>
+	^ aView list
+		title: 'Children';
+		items: [ self children ]
+]
+
+{ #category : #'*GToolkit4PetitParser2' }
+PP2Node >> gtDisplayOn: aStream [
+
+	self name isNil
+		ifFalse: [ self name gtDisplayOn: aStream ] 
+		ifTrue: [ aStream nextPutAll: ((self class name gtRemovePrefix: 'PP2') gtRemoveSuffix: 'Node') ]
+	
+]
+
+{ #category : #'*GToolkit4PetitParser2' }
 PP2Node >> gtNamedChildren [
 	"Answer the named children of the receiver."
 
