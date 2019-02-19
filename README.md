@@ -1,7 +1,7 @@
-# GT 4 PetitParser2
+# GToolkit for PetitParser2
 The development environment for PetitParser2 based on the [Glamorous Toolkit](https://gtoolkit.com).
 
-[PetitParser2 productions expanded in place](/doc/pp-coder-pp-parser-expansion.png "PetitParser2 productions expanded in place")
+![PetitParser2 productions expanded in place](doc/pp-coder-pp-parser-expansion.png "PetitParser2 productions expanded in place")
 
 
 ## How to load the code
