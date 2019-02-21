@@ -1,6 +1,58 @@
 Extension { #name : #PP2Node }
 
 { #category : #'*GToolkit4PetitParser2' }
+PP2Node >> asGraphChildrenIn: aParentElement havingVisited: aCollection [
+	(aCollection includes: self)
+		ifTrue: [ ^ self ].
+	self asPrivateGraphChildrenIn: aParentElement havingVisited: (aCollection copy add: self; yourself)
+]
+
+{ #category : #'*GToolkit4PetitParser2' }
+PP2Node >> asGraphElementIn: aParentElement havingVisited: aCollection [
+	| containerElement childrenElement className |
+	containerElement := BlElement new
+		constraintsDo: [ :c | 
+			c vertical fitContent.
+			c horizontal fitContent ];
+		background: Color white;
+		look: BrShadowLook;
+		margin: (BlInsets all: 10);
+		layout: BlLinearLayout vertical.
+	aParentElement addChild: containerElement.
+	className := self gtNameOrTypeDisplayString asRopedText
+		foreground: Color gray;
+		fontSize: 10.
+	containerElement
+		addChild:
+			(BlTextElement new
+				text: className;
+				padding: (BlInsets all: 5);
+				constraintsDo: [ :c | 
+					c vertical exact: 5.
+					c horizontal fitContent ]).
+	childrenElement := BlElement new
+		constraintsDo: [ :c | 
+			c vertical fitContent.
+			c horizontal fitContent ];
+		layout: BlLinearLayout horizontal alignCenter.
+	containerElement addChild: childrenElement.
+	self asGraphChildrenIn: childrenElement havingVisited: aCollection.
+	containerElement
+		addChild:
+			(BlTextElement new
+				text: (' ' asRopedText fontSize: 10);
+				padding: (BlInsets all: 5);
+				constraintsDo: [ :c | 
+					c vertical exact: 5.
+					c horizontal fitContent ])
+]
+
+{ #category : #'*GToolkit4PetitParser2' }
+PP2Node >> asPrivateGraphChildrenIn: aParentElement havingVisited: anObject [
+	"by default do nothing"
+]
+
+{ #category : #'*GToolkit4PetitParser2' }
 PP2Node >> gtChildrenFor: aView [
 	<gtView>
 	^ aView list
