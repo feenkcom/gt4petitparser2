@@ -5,7 +5,7 @@ Class {
 }
 
 { #category : #baseline }
-BaselineOfGToolkit4PetitParser2 >> baselineOf: spec [
+BaselineOfGToolkit4PetitParser2 >> baseline: spec [
 	<baseline>
 	spec
 		for: #common
