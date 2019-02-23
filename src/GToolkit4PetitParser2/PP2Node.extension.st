@@ -88,6 +88,13 @@ PP2Node >> gtGraphFor: aView [
 ]
 
 { #category : #'*GToolkit4PetitParser2' }
+PP2Node >> gtNameOrTypeDisplayString [
+	^ self hasName 
+		ifTrue: [ self name ]
+		ifFalse: [ (self class name gtRemovePrefix: 'PP2') gtRemoveSuffix: 'Node' ]
+]
+
+{ #category : #'*GToolkit4PetitParser2' }
 PP2Node >> gtNamedChildren [
 	"Answer the named children of the receiver."
 
