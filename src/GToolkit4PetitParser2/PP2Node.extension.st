@@ -71,6 +71,23 @@ PP2Node >> gtDisplayOn: aStream [
 ]
 
 { #category : #'*GToolkit4PetitParser2' }
+PP2Node >> gtGraphFor: aView [
+	<gtView>
+	^ aView explicit
+		title: 'Graph';
+		stencil: [ | parentElement |
+			parentElement := BlElement new
+				constraintsDo: [ :c | 
+					c vertical fitContent.
+					c horizontal fitContent ];
+				layout: BlLinearLayout new.
+			self
+				asGraphElementIn: parentElement
+				havingVisited: OrderedCollection new.
+			parentElement asPannableElement ]
+]
+
+{ #category : #'*GToolkit4PetitParser2' }
 PP2Node >> gtNamedChildren [
 	"Answer the named children of the receiver."
 
