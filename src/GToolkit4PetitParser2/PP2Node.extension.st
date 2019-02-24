@@ -9,47 +9,44 @@ PP2Node >> asGraphChildrenIn: aParentElement havingVisited: aCollection [
 
 { #category : #'*GToolkit4PetitParser2' }
 PP2Node >> asGraphElementIn: aParentElement havingVisited: aCollection [
-	| containerElement childrenElement className |
-	containerElement := BlElement new
-		constraintsDo: [ :c | 
-			c vertical fitContent.
-			c horizontal fitContent ];
-		background: Color white;
-		look: BrShadowLook;
-		margin: (BlInsets all: 10);
-		layout: BlLinearLayout vertical.
-	aParentElement addChild: containerElement.
-	className := self gtNameOrTypeDisplayString asRopedText
-		foreground: Color gray;
-		fontSize: 10.
-	containerElement
-		addChild:
-			(BlTextElement new
-				text: className;
-				padding: (BlInsets all: 5);
-				constraintsDo: [ :c | 
-					c vertical exact: 5.
-					c horizontal fitContent ]).
-	childrenElement := BlElement new
-		constraintsDo: [ :c | 
-			c vertical fitContent.
-			c horizontal fitContent ];
-		layout: BlLinearLayout horizontal alignCenter.
-	containerElement addChild: childrenElement.
-	self asGraphChildrenIn: childrenElement havingVisited: aCollection.
-	containerElement
-		addChild:
-			(BlTextElement new
-				text: (' ' asRopedText fontSize: 10);
-				padding: (BlInsets all: 5);
-				constraintsDo: [ :c | 
-					c vertical exact: 5.
-					c horizontal fitContent ])
+	| anExpander content |
+	anExpander := BrExpander new.
+	anExpander vFitContent; hFitContent.
+	anExpander look: BrGlamorousExpanderLook new.
+	anExpander header: [ BrLabel new look: BrGlamorousLabelLook new; text: self gtNameOrTypeDisplayString asRopedText ].
+	anExpander content: [ 
+		content := BlElement new constraintsDo: [ :c | c vertical matchParent. c horizontal matchParent ].
+		self
+			asPrivateGraphElementIn: content
+			havingVisited: aCollection.
+		content ].
+	
+	anExpander margin: (BlInsets all: 10).
+	aParentElement addChild: anExpander.
+
 ]
 
 { #category : #'*GToolkit4PetitParser2' }
 PP2Node >> asPrivateGraphChildrenIn: aParentElement havingVisited: anObject [
 	"by default do nothing"
+]
+
+{ #category : #'*GToolkit4PetitParser2' }
+PP2Node >> asPrivateGraphElementIn: aParentElement havingVisited: aCollection [
+	| childrenElement nameLabel |
+	aParentElement layout: BlLinearLayout vertical.
+	nameLabel := BrLabel new look: BrGlamorousLabelLook new; 
+		text: self gtNameOrTypeDisplayString asRopedText;
+		when: BlClickEvent do: [ :event | aParentElement phlow spawnObject: self ].
+	aParentElement addChild: nameLabel.
+	childrenElement := BlElement new
+		constraintsDo: [ :c | 
+			c vertical fitContent.
+			c horizontal fitContent ];
+		layout: BlLinearLayout horizontal alignCenter.
+	aParentElement addChild: childrenElement.
+	self asGraphChildrenIn: childrenElement havingVisited: aCollection.
+	aParentElement addChild: (BrLabel new look: BrGlamorousLabelLook new; text: ' ' asRopedText)
 ]
 
 { #category : #'*GToolkit4PetitParser2' }
