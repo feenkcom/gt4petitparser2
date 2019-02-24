@@ -1,8 +1,8 @@
 Extension { #name : #PP2DelegateNode }
 
 { #category : #'*GToolkit4PetitParser2' }
-PP2DelegateNode >> asPrivateGraphChildrenIn: aParentElement havingVisited: aCollection [
+PP2DelegateNode >> asElementChildrenIn: aParentElement havingVisited: aCollection [
 	self child
-		asGraphElementIn: aParentElement
+		asElementIn: aParentElement
 		havingVisited: aCollection
 ]

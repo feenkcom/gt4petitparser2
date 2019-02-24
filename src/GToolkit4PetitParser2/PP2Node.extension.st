@@ -1,38 +1,12 @@
 Extension { #name : #PP2Node }
 
 { #category : #'*GToolkit4PetitParser2' }
-PP2Node >> asGraphChildrenIn: aParentElement havingVisited: aCollection [
-	(aCollection includes: self)
-		ifTrue: [ ^ self ].
-	self asPrivateGraphChildrenIn: aParentElement havingVisited: (aCollection copy add: self; yourself)
-]
-
-{ #category : #'*GToolkit4PetitParser2' }
-PP2Node >> asGraphElementIn: aParentElement havingVisited: aCollection [
-	| anExpander content |
-	anExpander := BrExpander new.
-	anExpander vFitContent; hFitContent.
-	anExpander look: BrGlamorousExpanderLook new.
-	anExpander header: [ BrLabel new look: BrGlamorousLabelLook new; text: self gtNameOrTypeDisplayString asRopedText ].
-	anExpander content: [ 
-		content := BlElement new constraintsDo: [ :c | c vertical matchParent. c horizontal matchParent ].
-		self
-			asPrivateGraphElementIn: content
-			havingVisited: aCollection.
-		content ].
-	
-	anExpander margin: (BlInsets all: 10).
-	aParentElement addChild: anExpander.
-
-]
-
-{ #category : #'*GToolkit4PetitParser2' }
-PP2Node >> asPrivateGraphChildrenIn: aParentElement havingVisited: anObject [
+PP2Node >> asElementChildrenIn: aParentElement havingVisited: anObject [
 	"by default do nothing"
 ]
 
 { #category : #'*GToolkit4PetitParser2' }
-PP2Node >> asPrivateGraphElementIn: aParentElement havingVisited: aCollection [
+PP2Node >> asElementContentIn: aParentElement havingVisited: aCollection [
 	| childrenElement nameLabel |
 	aParentElement layout: BlLinearLayout vertical.
 	nameLabel := BrLabel new look: BrGlamorousLabelLook new; 
@@ -45,8 +19,28 @@ PP2Node >> asPrivateGraphElementIn: aParentElement havingVisited: aCollection [
 			c horizontal fitContent ];
 		layout: BlLinearLayout horizontal alignCenter.
 	aParentElement addChild: childrenElement.
-	self asGraphChildrenIn: childrenElement havingVisited: aCollection.
+	self asElementChildrenIn: childrenElement havingVisited: (aCollection copy add: self; yourself).
 	aParentElement addChild: (BrLabel new look: BrGlamorousLabelLook new; text: ' ' asRopedText)
+]
+
+{ #category : #'*GToolkit4PetitParser2' }
+PP2Node >> asElementIn: aParentElement havingVisited: aCollection [
+	| anExpander content |
+	(aCollection includes: self) ifTrue: [ ^ self ].
+	anExpander := BrExpander new.
+	anExpander vFitContent; hFitContent.
+	anExpander look: BrGlamorousExpanderLook new.
+	anExpander header: [ BrLabel new look: BrGlamorousLabelLook new; text: self gtNameOrTypeDisplayString asRopedText ].
+	anExpander content: [ 
+		content := BlElement new constraintsDo: [ :c | c vertical matchParent. c horizontal matchParent ].
+		self
+			asElementContentIn: content
+			havingVisited: aCollection.
+		content ].
+	
+	anExpander margin: (BlInsets all: 10).
+	aParentElement addChild: anExpander.
+
 ]
 
 { #category : #'*GToolkit4PetitParser2' }
@@ -79,7 +73,7 @@ PP2Node >> gtGraphFor: aView [
 					c horizontal fitContent ];
 				layout: BlLinearLayout new.
 			self
-				asGraphElementIn: parentElement
+				asElementIn: parentElement
 				havingVisited: OrderedCollection new.
 			parentElement asPannableElement ]
 ]
