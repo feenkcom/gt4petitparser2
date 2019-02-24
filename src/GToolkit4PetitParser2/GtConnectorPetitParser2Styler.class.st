@@ -22,34 +22,31 @@ GtConnectorPetitParser2Styler >> action: anObject [
 GtConnectorPetitParser2Styler >> extraStyle: aText ast: ast [
 	| selfSendsExamples |
 	
-	selfSendsExamples := self findExampleSendsIn: ast.
+	selfSendsExamples := self findCachedProductionReferencesIn: ast.
 	
-	selfSendsExamples do: [ :each |
-		| buttonAttribute targetExampleMethod aLink |
+	selfSendsExamples do: [ :aVariableNode |
+		| buttonAttribute targetProductionMethod aLink |
 		
-		targetExampleMethod := ast methodNode methodClass lookupSelector: each selector.
+		targetProductionMethod := ast methodNode methodClass lookupSelector: aVariableNode name.
 		
 		aLink := GtConnectorLink
 			source: ast method
-			target: targetExampleMethod.
+			target: targetProductionMethod.
 
 		buttonAttribute := GtConnectorTextButtonAttribute link: aLink.
-		buttonAttribute actionBlock: [ :anEvent | action valueWithEnoughArguments: { targetExampleMethod . each . anEvent currentTarget } ].
+		buttonAttribute actionBlock: [ :anEvent | action valueWithEnoughArguments: { targetProductionMethod . aVariableNode . anEvent currentTarget } ].
 		aText 
 			attributes: { buttonAttribute }
-			from: each stop - 1
-			to: each stop ].
+			from: aVariableNode stop - 1
+			to: aVariableNode stop ].
 	
 ]
 
 { #category : #moldability }
-GtConnectorPetitParser2Styler >> findExampleSendsIn: anAST [
+GtConnectorPetitParser2Styler >> findCachedProductionReferencesIn: anAST [
 	^ anAST allChildren asSet asArray select: [ :each | 
-		each isMessage and: [ 
-			each isSelfSend and: [ 
-				each isUnary and: [
-					(anAST methodNode methodClass canPerform: each selector) and: [ 
-						(anAST methodNode methodClass lookupSelector: each selector) isGTExampleMethod ] ] ] ] ]
+		each isVariable and: [ 
+			(anAST methodNode methodClass canPerform: each name) ] ]
 ]
 
 { #category : #initialization }

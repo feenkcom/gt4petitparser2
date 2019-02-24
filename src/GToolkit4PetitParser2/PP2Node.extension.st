@@ -37,7 +37,6 @@ PP2Node >> asElementIn: aParentElement havingVisited: aCollection [
 			asElementContentIn: content
 			havingVisited: aCollection.
 		content ].
-	
 	anExpander margin: (BlInsets all: 10).
 	aParentElement addChild: anExpander.
 
