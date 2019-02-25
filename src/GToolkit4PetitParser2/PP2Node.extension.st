@@ -1,16 +1,18 @@
 Extension { #name : #PP2Node }
 
 { #category : #'*GToolkit4PetitParser2' }
-PP2Node >> asElementChildrenIn: aParentElement havingVisited: anObject [
+PP2Node >> asElementChildrenIn: aParentElement havingVisited: anObject withExtraElements: anElementsCollection [
 	"by default do nothing"
 ]
 
 { #category : #'*GToolkit4PetitParser2' }
-PP2Node >> asElementContentIn: aParentElement havingVisited: aCollection [
+PP2Node >> asElementContentIn: aParentElement havingVisited: aCollection withExtraElements: anElementsCollection [
 	| childrenElement nameLabel |
 	aParentElement layout: BlLinearLayout vertical.
-	nameLabel := BrLabel new look: BrGlamorousLabelLook new; 
+	nameLabel := BrLabel new
+		look: BrGlamorousLabelLook new;
 		text: self gtNameOrTypeDisplayString asRopedText;
+		margin: (BlInsets bottom: 10);
 		when: BlClickEvent do: [ :event | aParentElement phlow spawnObject: self ].
 	aParentElement addChild: nameLabel.
 	childrenElement := BlElement new
@@ -19,27 +21,49 @@ PP2Node >> asElementContentIn: aParentElement havingVisited: aCollection [
 			c horizontal fitContent ];
 		layout: BlLinearLayout horizontal alignCenter.
 	aParentElement addChild: childrenElement.
-	self asElementChildrenIn: childrenElement havingVisited: (aCollection copy add: self; yourself).
-	aParentElement addChild: (BrLabel new look: BrGlamorousLabelLook new; text: ' ' asRopedText)
+	self
+		asElementChildrenIn: childrenElement
+		havingVisited:
+			(aCollection copy
+				add: self;
+				yourself)
+		withExtraElements: anElementsCollection.
+	"aParentElement
+		addChild:
+			(BrLabel new
+				look: BrGlamorousLabelLook new;
+				text: ' ' asRopedText)"
 ]
 
 { #category : #'*GToolkit4PetitParser2' }
-PP2Node >> asElementIn: aParentElement havingVisited: aCollection [
-	| anExpander content |
-	(aCollection includes: self) ifTrue: [ ^ self ].
-	anExpander := BrExpander new.
-	anExpander vFitContent; hFitContent.
+PP2Node >> asElementIn: aParentElement havingVisited: aCollection withExtraElements: anElementsCollection [
+	| anExpander |
+"	(aCollection includes: self)
+		ifTrue: [ ^ self ].
+"	anExpander := BrExpander new.
+	anExpander
+		vFitContent;
+		hFitContent.
 	anExpander look: BrGlamorousExpanderLook new.
-	anExpander header: [ BrLabel new look: BrGlamorousLabelLook new; text: self gtNameOrTypeDisplayString asRopedText ].
-	anExpander content: [ 
-		content := BlElement new constraintsDo: [ :c | c vertical matchParent. c horizontal matchParent ].
-		self
-			asElementContentIn: content
-			havingVisited: aCollection.
-		content ].
-	anExpander margin: (BlInsets all: 10).
-	aParentElement addChild: anExpander.
-
+	anExpander
+		header: [ BrLabel new
+				look: BrGlamorousLabelLook new;
+				text: self gtNameOrTypeDisplayString asRopedText ].
+	anExpander
+		content: [ | content |
+			content := BlElement new
+				constraintsDo: [ :c | 
+					c vertical fitContent.
+					c horizontal fitContent ].
+			self
+				asElementContentIn: content
+				havingVisited: aCollection
+				withExtraElements: OrderedCollection new.
+			content].
+	anExpander margin: (BlInsets top: 1 left: 1 bottom: 1 right: 1).
+	anElementsCollection isEmpty
+		ifTrue: [ aParentElement addChild: anExpander ]
+		ifFalse: 	[ aParentElement addChild: (self wrap: anExpander withExtraElements: anElementsCollection) ]
 ]
 
 { #category : #'*GToolkit4PetitParser2' }
@@ -73,7 +97,8 @@ PP2Node >> gtGraphFor: aView [
 				layout: BlLinearLayout new.
 			self
 				asElementIn: parentElement
-				havingVisited: OrderedCollection new.
+				havingVisited: OrderedCollection new
+				withExtraElements: OrderedCollection new.
 			parentElement asPannableElement ]
 ]
 
@@ -149,4 +174,27 @@ PP2Node >> gtTreeFor: aView [
 		m layout custom: (GtGraphHorizontalDominanceTreeLayout new 
 				horizontalGap: 50).
 		]
+]
+
+{ #category : #'*GToolkit4PetitParser2' }
+PP2Node >> wrap: content withExtraElements: anElementCollection [
+	| extraElement container |
+	container := BlElement new
+		constraintsDo: [ :c | 
+			c vertical fitContent.
+			c horizontal fitContent ];
+		layout: BlLinearLayout vertical.
+	extraElement := BlElement new
+		constraintsDo: [ :c | 
+			c vertical fitContent.
+			c horizontal fitContent ];
+		layout: (BlLinearLayout horizontal cellSpacing: 10);
+		padding: (BlInsets left: -10).
+	anElementCollection do: [ :each | 
+		self flag: 'this is a hack'.
+		each removeFromParent ].
+	extraElement addChildren: anElementCollection reverse.
+	container addChild: content.
+	container addChild: extraElement.
+	^ container
 ]
