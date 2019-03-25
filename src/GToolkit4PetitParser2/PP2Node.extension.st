@@ -134,8 +134,7 @@ PP2Node >> gtSamplerFor: aView [
 					(self 
 						deoptimize;
 						debug: input withContext: context) value.
-				aButton phlow spawnObject: context ] ]
-		
+					aButton phlow spawnObject: context ] ]
 ]
 
 { #category : #'*GToolkit4PetitParser2' }
