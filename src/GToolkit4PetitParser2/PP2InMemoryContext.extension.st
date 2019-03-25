@@ -32,3 +32,22 @@ PP2InMemoryContext >> gtTextFor: aView [
 			text ]
 
 ]
+
+{ #category : #'*GToolkit4PetitParser2' }
+PP2InMemoryContext >> gtTreeFor: aView [
+	<gtView>
+	self debugResult children isEmpty ifTrue: [ ^ aView empty ].
+	^ aView columnedTree
+		title: 'Execution Traces';
+		items: [ {self debugResult children first} ];
+		column: 'Parser' do: [ :column |
+			column itemFormat: [ :debuggerResult | debuggerResult gtFormattedText ] ];
+		column: 'Value' do: [ :column |
+			column itemFormat: [ :debuggerResult |
+				| result text |
+				result := debuggerResult result.
+				text := (result printStringLimitedTo: 50) asRopedText.
+				result isPetit2Failure ifTrue: [ text foreground: Color gray ].
+				result ] ];
+		children: [ :debuggerResult | debuggerResult children ]
+]
