@@ -48,6 +48,6 @@ PP2InMemoryContext >> gtTreeFor: aView [
 				result := debuggerResult result.
 				text := (result printStringLimitedTo: 50) asRopedText.
 				result isPetit2Failure ifTrue: [ text foreground: Color gray ].
-				result ] ];
+				text ] ];
 		children: [ :debuggerResult | debuggerResult children ]
 ]
