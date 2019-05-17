@@ -90,17 +90,13 @@ PP2Node >> gtGraphFor: aView [
 	^ aView explicit
 		title: 'Graph';
 		actionButtonIcon:  BrGlamorousIcons zoomin asElement 
-			action: [ :aButton :aTab | 
-				aTab viewContentElement zoomIn];
+			action: [ :aButton :aTab | 	aTab viewContentElement zoomIn];
 		actionButtonIcon:  BrGlamorousIcons zoomout asElement 
-			action: [ :aButton :aTab | 
-				aTab viewContentElement zoomOut];
+			action: [ :aButton :aTab | 	aTab viewContentElement zoomOut];
 		actionButtonIcon:  BrGlamorousIcons zoomtofit asElement 
-			action: [ :aButton :aTab | 
-				aTab viewContentElement zoomToFit];
+			action: [ :aButton :aTab | aTab viewContentElement zoomToFit];
 		actionButtonIcon:  BrGlamorousIcons actualsize asElement 
-			action: [ :aButton :aTab | 
-				aTab viewContentElement zoomToActualSize];
+			action: [ :aButton :aTab | aTab viewContentElement zoomToActualSize];
 		stencil: [ | parentElement |
 			parentElement := BlElement new
 				constraintsDo: [ :c | 
