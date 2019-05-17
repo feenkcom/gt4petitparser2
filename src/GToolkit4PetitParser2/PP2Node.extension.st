@@ -44,7 +44,7 @@ PP2Node >> asElementIn: aParentElement havingVisited: aCollection withExtraEleme
 	anExpander
 		vFitContent;
 		hFitContent.
-	anExpander look: BrGlamorousExpanderLook new.
+	anExpander look: GtCoderExpanderLook new.
 	anExpander
 		header: [ BrLabel new
 				look: BrGlamorousLabelLook new;
@@ -89,6 +89,18 @@ PP2Node >> gtGraphFor: aView [
 	<gtView>
 	^ aView explicit
 		title: 'Graph';
+		actionButtonIcon:  BrGlamorousIcons zoomin asElement 
+			action: [ :aButton :aTab | 
+				aTab viewContentElement zoomIn];
+		actionButtonIcon:  BrGlamorousIcons zoomout asElement 
+			action: [ :aButton :aTab | 
+				aTab viewContentElement zoomOut];
+		actionButtonIcon:  BrGlamorousIcons zoomtofit asElement 
+			action: [ :aButton :aTab | 
+				aTab viewContentElement zoomToFit];
+		actionButtonIcon:  BrGlamorousIcons actualsize asElement 
+			action: [ :aButton :aTab | 
+				aTab viewContentElement zoomToActualSize];
 		stencil: [ | parentElement |
 			parentElement := BlElement new
 				constraintsDo: [ :c | 
