@@ -9,7 +9,7 @@ PP2DebugResult >> gtDisplayWithoutResults [
 PP2DebugResult >> gtDisplayWithoutResultsOn: aStream [ 
 	self parser ifNil: [ ^ self printOn: aStream ].
 	aStream 
-		nextPutAll: self parser displayName;
+		nextPutAll: self parser gtDisplayString;
 		nextPutAll: '(';
 		nextPutAll: self allResults size asString;
 		nextPutAll: ')'
