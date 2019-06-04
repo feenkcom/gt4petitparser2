@@ -28,11 +28,6 @@ PP2Node >> asElementContentIn: aParentElement havingVisited: aCollection withExt
 				add: self;
 				yourself)
 		withExtraElements: anElementsCollection.
-	"aParentElement
-		addChild:
-			(BrLabel new
-				look: BrGlamorousLabelLook new;
-				text: ' ' asRopedText)"
 ]
 
 { #category : #'*GToolkit4PetitParser2' }
@@ -69,10 +64,11 @@ PP2Node >> asElementIn: aParentElement havingVisited: aCollection withExtraEleme
 { #category : #'*GToolkit4PetitParser2' }
 PP2Node >> gtChildrenFor: aView [
 	<gtView>
-	^ aView list
+	^ aView tree
 		title: 'Children';
 		priority: 15;
-		items: [ self children ]
+		items: [ self children ];
+		children: [:each | each children]
 ]
 
 { #category : #'*GToolkit4PetitParser2' }
