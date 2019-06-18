@@ -161,21 +161,21 @@ PP2Node >> gtTreeFor: aView [
 				BlParabollaArcElement new
 					zIndex: -1;
 					curvatureFraction: 0.2;
-					border: (BlBorder paint: (Color gray alpha: 0.5) width: 2);
+					border: (BlBorder paint: (Color lightGray alpha: 0.5) width: 1);
 						toHead:
 							(BlArrowheadSimpleArrow new
 								arrowLengthFraction: 5;
 								arrowNoseAngle: 60;
 								border:
 									(BlBorder builder
-										paint: (Color gray alpha: 0.5);
-											width: 2;
+										paint: (Color lightGray alpha: 0.5);
+											width: 1;
 											build)) ];
 			fromRightCenter;
 			toLeftCenter;
 			connectToAll: #children.
 		m layout custom: (GtGraphHorizontalDominanceTreeLayout new 
-				horizontalGap: 50).
+				horizontalGap: 30).
 		]
 ]
 
