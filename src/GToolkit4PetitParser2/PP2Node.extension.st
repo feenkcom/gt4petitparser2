@@ -129,7 +129,7 @@ PP2Node >> gtSamplerFor: aView [
 		text: [ '' ];
 		actionStencil: [ :tab | 
 			BrButton new 
-				look: BrGlamorousButtonExteriorRectangularLook + BrGlamorousButtonIconLook;
+				look: BrGlamorousButtonWithIconLook;
 				icon: BrGlamorousIcons playinspect asElement;
 				action: [ :aButton |
 					| input context | 
