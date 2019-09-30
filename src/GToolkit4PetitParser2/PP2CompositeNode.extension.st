@@ -3,7 +3,7 @@ Extension { #name : #PP2CompositeNode }
 { #category : #'*GToolkit4PetitParser2' }
 PP2CompositeNode >> buildBlankContainer: method [
 	|container|
-	container := VocalBlElement new.
+	container := BlVocalElement new.
 	container 
 		connector 
 			beLayoutSource; 
@@ -45,7 +45,7 @@ PP2CompositeNode >> buildCloseButton: gtconnector. [
 { #category : #'*GToolkit4PetitParser2' }
 PP2CompositeNode >> buildEditor: aMethod for: gtconnector [
 	| vocalVisualTarget styler editorElement text |
-	vocalVisualTarget:= VocalBlElement new.
+	vocalVisualTarget:= BlVocalElement new.
 	vocalVisualTarget
 		constraintsDo: [ :c |
 		c horizontal matchParent.
@@ -118,7 +118,7 @@ PP2CompositeNode >> gtConnectionsFor: aView [
 { #category : #'*GToolkit4PetitParser2' }
 PP2CompositeNode >> vocalEditorContainer [
 	|vocalEditorContainer|
-	vocalEditorContainer := VocalBlElement new.
+	vocalEditorContainer := BlVocalElement new.
 	vocalEditorContainer constraintsDo: [ :c | c vertical matchParent. c horizontal matchParent. ].
 	vocalEditorContainer layout: BlLinearLayout new.
 	^ vocalEditorContainer
