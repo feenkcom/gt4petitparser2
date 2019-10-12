@@ -31,7 +31,7 @@ PP2CompositeNode >> buildBottomResizerFor: blankContainer [
 ]
 
 { #category : #'*GToolkit4PetitParser2' }
-PP2CompositeNode >> buildCloseButton: gtconnector. [ 
+PP2CompositeNode >> buildCloseButton: gtconnector [. 
 	^ GtInspectorRoundButtonStencil new asElement
 		icon: (GtInspectorPlusIconStencil close asElement);
 		constraintsDo: [ :c |
