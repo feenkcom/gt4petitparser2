@@ -27,8 +27,7 @@ PP2InMemoryContext >> gtTextFor: aView [
 				attribute: (GtPlaygroundEvaluatedCodeButtonAttribute new
 						beNotOverwritableByStyler;
 						beAppend;
-						result: self position;
-						paint: (Color fromHexString: #'90CAF9')).
+						result: self position).
 			text ]
 
 ]
