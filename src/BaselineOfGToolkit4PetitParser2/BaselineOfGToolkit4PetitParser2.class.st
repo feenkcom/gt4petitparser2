@@ -9,7 +9,7 @@ BaselineOfGToolkit4PetitParser2 >> baseline: spec [
 	<baseline>
 	spec for: #'common' do: [
 		spec baseline: 'PetitParser2Core' with: [
-				spec repository: 'github://kursjan/petitparser2:4c10fb086db477d2067bf1d22f59d647cfe5b344' ].
+				spec repository: 'github://kursjan/petitparser2:09f02944f98020302e35c7444d47fcecdcb2e621' ].
 		spec package: 'GToolkit4PetitParser2' with: [
 				spec requires: #(#PetitParser2Core ). ]. ].
 
