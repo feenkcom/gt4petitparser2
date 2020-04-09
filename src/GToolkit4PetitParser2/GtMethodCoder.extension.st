@@ -14,7 +14,7 @@ GtMethodCoder >> petitParserProductionAstFor: anAST into: coderAddOns [
 		addStyler: GtCoderExpandablePetitParserProductionStyler new.
 	coderAddOns
 		addContextAction: 'Inspect parser' translated
-		icon: BrGlamorousIcons inspect
+		icon: BrGlamorousVectorIcons inspect
 		action: [ :button | 
 			button phlow
 				spawnObject: (anAST methodClass new perform: anAST selector) ]

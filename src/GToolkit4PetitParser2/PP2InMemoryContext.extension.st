@@ -3,12 +3,13 @@ Extension { #name : #PP2InMemoryContext }
 { #category : #'*GToolkit4PetitParser2' }
 PP2InMemoryContext >> gtResultFor: aView [
 	<gtView>
+
 	^ aView textEditor
 		title: 'Return value';
 		priority: 10;
 		text: [ self returnValue gtDisplayString ];
-		actionButtonIcon: BrGlamorousIcons inspect action: [ : aButton |
-			aButton phlow spawnObject: self returnValue]
+		actionButtonIcon: BrGlamorousVectorIcons inspect
+			action: [ :aButton | aButton phlow spawnObject: self returnValue ]
 ]
 
 { #category : #'*GToolkit4PetitParser2' }
