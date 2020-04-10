@@ -32,8 +32,8 @@ TPP2Context >> gtResultFor: aView [
 	^ aView textEditor
 		title: 'Return value';
 		text: [ self returnValue gtDisplayString ];
-		actionButtonIcon: BrGlamorousIcons inspect action: [ : aButton |
-			aButton phlow spawnObject: self returnValue]
+		actionButtonIcon: BrGlamorousVectorIcons inspect
+			action: [ :aButton | aButton phlow spawnObject: self returnValue ]
 ]
 
 { #category : #'*GToolkit4PetitParser2' }
