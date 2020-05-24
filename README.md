@@ -1,16 +1,10 @@
-# GToolkit for PetitParser2
+# GT 4 PetitParser2
 The development environment for PetitParser2 based on the [Glamorous Toolkit](https://gtoolkit.com).
 
 ![PetitParser2 productions expanded in place](doc/pp-coder-pp-parser-expansion.png "PetitParser2 productions expanded in place")
 
 
-## How to load the code
+## How to load
 
-Execute the following code in a Glamorous Toolkit image:
+The ideal way to load the code is by loading the entire [Glamorous Toolkit project](https://github.com/feenkcom/gtoolkit).
 
-```
-Metacello new
-   baseline: 'GToolkit4PetitParser2';
-   repository: 'github://feenkcom/gt4petitparser2';
-   load.
-```
