@@ -1,5 +1,5 @@
 # GT for PetitParser2
-The development environment for PetitParser2 based on the [Glamorous Toolkit](https://gtoolkit.com).
+The development environment for [PetitParser2](https://github.com/kursjan/petitparser2) based on the [Glamorous Toolkit](https://gtoolkit.com).
 
 ![PetitParser2 productions expanded in place](doc/pp-coder-pp-parser-expansion.png "PetitParser2 productions expanded in place")
 
