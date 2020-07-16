@@ -7,9 +7,8 @@ TPP2Debuggable >> gtTreeFor: aView [
 	^ aView columnedTree
 		title: 'Execution Traces';
 		items: [ {self debugResult children first} ];
-		column: 'Parser' do: [ :column |
-			column item: [ :debuggerResult | debuggerResult gtFormattedText ]; matchParent ];
-		column: 'Value' do: [ :column |
-			column item: [ :debuggerResult | debuggerResult result printStringLimitedTo: 50 ]; matchParent ];
+		column: 'Parser' item: [ :debuggerResult | debuggerResult gtFormattedText ];
+		column: 'Value' item: [ :debuggerResult | 
+			debuggerResult result printStringLimitedTo: 50 ];
 		children: [ :debuggerResult | debuggerResult children ]
 ]
