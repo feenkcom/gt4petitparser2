@@ -7,7 +7,7 @@ PP2LiteralNode >> asElementIn: aParentElement havingVisited: aCollection withExt
 		look: BrGlamorousLabelLook new;
 		background: Color white;
 		text: self gtNameOrTypeDisplayString asRopedText;
-		geometry: (BlRectangle cornerRadius: 3);
+		geometry: (BlRoundedRectangleGeometry cornerRadius: 3);
 		border: (BlBorder paint: BrGlamorousColors lightBorderColor width: 1);
 		padding: (BlInsets all: 10).	
 	aParentElement addChild: (self wrap: label withExtraElements: anElementsCollection)
