@@ -2,18 +2,16 @@ Extension { #name : #PP2CompositeNode }
 
 { #category : #'*GToolkit4PetitParser2' }
 PP2CompositeNode >> buildBlankContainer: method [
-	|container|
-	container := GtConnectorElement new.
-	container 
-		connector 
-			beLayoutSource; 
-			beLayoutTarget;
-			beVisualTarget;
-			model: method.
+	| container |
+	container := BlElement new.
+	container connector 
+		model: method;
+		beLayoutSource; 
+		beLayoutTarget;
+		beVisualTarget.
 
-	container 
+	container
 		size: 300@100; 
-		"border: (BlBorder paint: (BrGlamorousColors editorBorderColor) width: 1);"
 		background: Color white;
 		look: BrShadowLook new;
 		layout: BlLinearLayout new.
@@ -44,12 +42,7 @@ PP2CompositeNode >> buildCloseButton: gtconnector [.
 
 { #category : #'*GToolkit4PetitParser2' }
 PP2CompositeNode >> buildEditor: aMethod for: gtconnector [
-	| vocalVisualTarget styler editorElement text |
-	vocalVisualTarget:= GtConnectorElement new.
-	vocalVisualTarget
-		constraintsDo: [ :c |
-		c horizontal matchParent.
-		c vertical matchParent ].
+	| styler editorElement text |
 				
 	styler := GtConnectorPetitParser2Styler new.
 	styler action: [ :anExampleMethod | gtconnector addEntity: anExampleMethod ].
@@ -66,10 +59,7 @@ PP2CompositeNode >> buildEditor: aMethod for: gtconnector [
 	"because we connect editors with lines based on styler we must change text
 	only after editor is added to the scene, otherwise events will be ignored"
 	editorElement text: text.	
-	vocalVisualTarget addChild: editorElement.
-
-	^ vocalVisualTarget.
-					
+	^ editorElement
 ]
 
 { #category : #'*GToolkit4PetitParser2' }
@@ -83,6 +73,15 @@ PP2CompositeNode >> buildRightResizerFor: blankContainer [
 ]
 
 { #category : #'*GToolkit4PetitParser2' }
+PP2CompositeNode >> editorContainer [
+	^ BlElement new
+		constraintsDo: [ :c | 
+			c vertical matchParent. 
+			c horizontal matchParent ];
+		layout: BlLinearLayout new
+]
+
+{ #category : #'*GToolkit4PetitParser2' }
 PP2CompositeNode >> gtConnectionsFor: aView [
 	^ aView explicit
 		title: 'Connections';
@@ -91,19 +90,20 @@ PP2CompositeNode >> gtConnectionsFor: aView [
 			gtconnector := GtConnector new.
 			method := self class>>#start.
 			gtconnector stencil: [ :startMethod |
-				| blankContainer vocalEditorContainer vocalVisualTarget aBottomResizer aRightResizer aCloseButton |
+				| blankContainer editorContainer editorElement aBottomResizer aRightResizer aCloseButton |
 				"The blankContainer is there as a placeholder for toggling between the source and the output of the example."
 								
 				blankContainer := self buildBlankContainer: startMethod.
 				blankContainer clipChildren: false.
-				vocalEditorContainer := self vocalEditorContainer.
-				vocalVisualTarget := self buildEditor: startMethod for: gtconnector.
-				vocalEditorContainer addChild: vocalVisualTarget.
 				aRightResizer := self buildRightResizerFor: blankContainer.
 				aBottomResizer := self buildBottomResizerFor: blankContainer.
+				
+				editorContainer := self editorContainer.
+				editorElement := self buildEditor: startMethod for: gtconnector.
+				editorContainer addChild: editorElement.
 				aCloseButton := self buildCloseButton: gtconnector. 
 				
-				blankContainer addChild: vocalEditorContainer.
+				blankContainer addChild: editorContainer.
 				blankContainer addChild: aRightResizer.
 				blankContainer addChild: aBottomResizer.
 				blankContainer addChild: aCloseButton.
@@ -113,13 +113,4 @@ PP2CompositeNode >> gtConnectionsFor: aView [
 		
 			gtconnector addEntity: method.
 			gtconnector asPannableElement ]
-]
-
-{ #category : #'*GToolkit4PetitParser2' }
-PP2CompositeNode >> vocalEditorContainer [
-	|vocalEditorContainer|
-	vocalEditorContainer := GtConnectorElement new.
-	vocalEditorContainer constraintsDo: [ :c | c vertical matchParent. c horizontal matchParent. ].
-	vocalEditorContainer layout: BlLinearLayout new.
-	^ vocalEditorContainer
 ]
