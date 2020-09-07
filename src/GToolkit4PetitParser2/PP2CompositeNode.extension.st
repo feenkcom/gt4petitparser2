@@ -83,6 +83,7 @@ PP2CompositeNode >> editorContainer [
 
 { #category : #'*GToolkit4PetitParser2' }
 PP2CompositeNode >> gtConnectionsFor: aView [
+	<gtView>
 	^ aView explicit
 		title: 'Connections';
 		stencil: [	
