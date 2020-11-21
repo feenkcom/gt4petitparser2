@@ -15,7 +15,5 @@ GtMethodCoder >> petitParserProductionAstFor: anAST into: coderAddOns [
 	coderAddOns
 		addContextAction: 'Inspect parser' translated
 		icon: BrGlamorousVectorIcons inspect
-		action: [ :anEditorElement | 
-			anEditorElement phlow
-				spawnObject: (anAST methodClass new perform: anAST selector) ]
+		action: [ :aCoderUIModel :anEvent | self notifyObjectSpawn: (anAST methodClass new perform: anAST selector) ]
 ]
