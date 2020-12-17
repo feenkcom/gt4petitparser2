@@ -13,7 +13,7 @@ GtCoderExpandablePetitParserProductionStyler >> visitInstanceVariableNode: aIVNo
 		styleFrom: aIVNode stop
 		to: aIVNode stop
 		with:
-			{(BrTextExpandButtonAttribute new
+			{(BrGlamorousTrangleExpanderTextAttribute new
 				attributesCreatingBlock: [ BrTextAdornmentDynamicAttribute new
 						beAppend;
 						stencil: [ | editorElement method coder |
