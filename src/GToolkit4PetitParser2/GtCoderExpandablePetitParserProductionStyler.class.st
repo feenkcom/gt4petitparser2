@@ -18,7 +18,7 @@ GtCoderExpandablePetitParserProductionStyler >> visitInstanceVariableNode: aIVNo
 						beAppend;
 						stencil: [ | editorElement method coder |
 							method := aIVNode methodNode methodClass lookupSelector: aIVNode name.
-							coder := GtMethodCoder forExample: (method methodClass gtExamplesFactory createExample: method).
+							coder := GtPharoMethodCoder forExample: (method methodClass gtExamplesFactory createExample: method).
 							editorElement := (coder asCoderUIModel expanded: true) asElement.
 							editorElement border: (BlBorder paint: Color veryLightGray width: 1).
 							editorElement
