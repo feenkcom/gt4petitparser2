@@ -1,7 +1,7 @@
-Extension { #name : #GtMethodCoder }
+Extension { #name : #GtPharoMethodCoder }
 
 { #category : #'*GToolkit4PetitParser2' }
-GtMethodCoder >> petitParserProductionAstFor: anAST into: coderAddOns [
+GtPharoMethodCoder >> petitParserProductionAstFor: anAST into: coderAddOns [
 	<gtAstCoderAddOns: 10>
 	(anAST notNil
 		and: [ anAST isParseError not
