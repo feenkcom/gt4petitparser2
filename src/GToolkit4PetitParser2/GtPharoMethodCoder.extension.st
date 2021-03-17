@@ -2,7 +2,7 @@ Extension { #name : #GtPharoMethodCoder }
 
 { #category : #'*GToolkit4PetitParser2' }
 GtPharoMethodCoder >> petitParserProductionAstFor: anAST into: coderAddOns [
-	<gtAstCoderAddOns: 10>
+	"<gtAstCoderAddOns: 10>"
 	(anAST notNil
 		and: [ anAST isParseError not
 				and: [ anAST methodClass inheritsFrom: PP2CompositeNode ] ])

@@ -1,6 +1,6 @@
 Class {
 	#name : #GtCoderExpandablePetitParserProductionStyler,
-	#superclass : #GtASTStyler,
+	#superclass : #GtRBASTStyler,
 	#category : #GToolkit4PetitParser2
 }
 
