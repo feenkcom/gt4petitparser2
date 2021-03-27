@@ -8,5 +8,5 @@ PP2TrimmingNode >> asElementIn: aParentElement havingVisited: aCollection withEx
 	self
 		asElementChildrenIn: aParentElement
 		havingVisited: aCollection
-		withExtraElements: (anElementsCollection copy add: (BrLabel new text: 'trim'; look: (BrGlamorousLabelLook new foreground: Color gray)); yourself)
+		withExtraElements: (anElementsCollection copy add: (BrLabel new text: 'trim'; aptitude: (BrGlamorousLabelAptitude new foreground: Color gray)); yourself)
 ]

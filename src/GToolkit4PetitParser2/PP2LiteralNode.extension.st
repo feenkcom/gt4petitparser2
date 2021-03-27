@@ -4,7 +4,7 @@ Extension { #name : #PP2LiteralNode }
 PP2LiteralNode >> asElementIn: aParentElement havingVisited: aCollection withExtraElements: anElementsCollection [
 	| label |
 	label := BrLabel new
-		look: BrGlamorousLabelLook new;
+		aptitude: BrGlamorousLabelAptitude new;
 		background: Color white;
 		text: self gtNameOrTypeDisplayString asRopedText;
 		geometry: (BlRoundedRectangleGeometry cornerRadius: 3);
