@@ -16,7 +16,7 @@ PP2PossesiveRepeatingNode >> asElementIn: aParentElement havingVisited: aCollect
 					c horizontal fitContent ];
 					layout: BlLinearLayout new.
 	wrapper addChild: content.
-	aParentElement addChild: (self wrap: wrapper withExtraElements: (anElementsCollection copy add: (BrLabel new text: self min asString, '..', (self max isInfinite ifTrue: ['n'] ifFalse: [self max asString]); look: (BrGlamorousLabelLook new foreground: Color gray)); yourself)).
+	aParentElement addChild: (self wrap: wrapper withExtraElements: (anElementsCollection copy add: (BrLabel new text: self min asString, '..', (self max isInfinite ifTrue: ['n'] ifFalse: [self max asString]); aptitude: (BrGlamorousLabelAptitude new foreground: Color gray)); yourself)).
 	self
 		asElementChildrenIn: content
 		havingVisited: aCollection

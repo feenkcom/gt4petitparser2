@@ -8,5 +8,5 @@ PP2FlattenNode >> asElementIn: aParentElement havingVisited: aCollection withExt
 	self
 		asElementChildrenIn: aParentElement
 		havingVisited: aCollection
-		withExtraElements: (anElementsCollection copy add: (BrLabel new text: 'flatten'; look: (BrGlamorousLabelLook new foreground: Color gray)); yourself)
+		withExtraElements: (anElementsCollection copy add: (BrLabel new text: 'flatten'; aptitude: (BrGlamorousLabelAptitude new foreground: Color gray)); yourself)
 ]

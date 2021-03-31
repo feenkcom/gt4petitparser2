@@ -13,7 +13,7 @@ PP2CompositeNode >> buildBlankContainer: method [
 	container
 		size: 300@100; 
 		background: Color white;
-		look: BrShadowLook new;
+		aptitude: BrShadowAptitude new;
 		layout: BlLinearLayout new.
 	^ container
 ]
@@ -21,7 +21,7 @@ PP2CompositeNode >> buildBlankContainer: method [
 { #category : #'*GToolkit4PetitParser2' }
 PP2CompositeNode >> buildBottomResizerFor: blankContainer [
 	^  BlElement new
-			look: BrGlamorousResizerBottomBarLook new;
+			aptitude: BrGlamorousResizerBottomBarAptitude new;
 			background: BrGlamorousColors editorBorderColor;
 			constraintsDo: [ :c | c vertical exact: 5. c grid horizontal span: 2];
 			addEventHandler: (BlResizerBottomListener new resizeTarget: blankContainer; minimumExtent: 0@75).
@@ -48,7 +48,7 @@ PP2CompositeNode >> buildEditor: aMethod for: gtconnector [
 	styler action: [ :anExampleMethod | gtconnector addEntity: anExampleMethod ].
 	styler classOrMetaClass: aMethod methodClass.
 				
-	editorElement := BrEditor new look: BrGlamorousCodeEditorLook new.
+	editorElement := BrEditor new aptitude: BrGlamorousCodeEditorAptitude new.
 	editorElement
 		constraintsDo: [ :c |
 			c horizontal matchParent.
@@ -65,7 +65,7 @@ PP2CompositeNode >> buildEditor: aMethod for: gtconnector [
 { #category : #'*GToolkit4PetitParser2' }
 PP2CompositeNode >> buildRightResizerFor: blankContainer [
 	^  BlElement new
-			look: BrGlamorousResizerRightBarLook new;
+			aptitude: BrGlamorousResizerRightBarAptitude new;
 			background: BrGlamorousColors editorBorderColor;
 			constraintsDo: [ :c | c margin: (BlInsets right: 0). c horizontal exact: 5.];
 			addEventHandler: (BlResizerRightListener new resizeTarget: blankContainer; minimumExtent: 75@0).

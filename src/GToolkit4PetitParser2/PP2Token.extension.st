@@ -19,7 +19,7 @@ PP2Token >> gtSourceFor: aView [
 				to: self stop.
 			e := BrEditor new
 				text: text;
-				look: BrGlamorousCodeEditorLook new.
+				aptitude: BrGlamorousCodeEditorAptitude new.
 			e
 				scrollToPosition: (string lineNumberCorrespondingToIndex: self start).
 			e 

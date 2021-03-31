@@ -9,6 +9,6 @@ PP2EndNode >> asElementIn: aParentElement havingVisited: aCollection withExtraEl
 		asElementChildrenIn: aParentElement
 		havingVisited: aCollection
 		withExtraElements: (anElementsCollection copy 
-			add: (BrLabel new text: 'end'; look: (BrGlamorousLabelLook new foreground: Color gray)); 
+			add: (BrLabel new text: 'end'; aptitude: (BrGlamorousLabelAptitude new foreground: Color gray)); 
 			yourself)
 ]

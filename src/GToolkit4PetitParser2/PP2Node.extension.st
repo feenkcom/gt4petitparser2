@@ -10,7 +10,7 @@ PP2Node >> asElementContentIn: aParentElement havingVisited: aCollection withExt
 	| childrenElement nameLabel |
 	aParentElement layout: BlLinearLayout vertical.
 	nameLabel := BrLabel new
-		look: BrGlamorousLabelLook new;
+		aptitude: BrGlamorousLabelAptitude new;
 		text: self gtNameOrTypeDisplayString asRopedText;
 		margin: (BlInsets bottom: 10);
 		when: BlClickEvent do: [ :event | aParentElement phlow spawnObject: self ].
@@ -39,10 +39,10 @@ PP2Node >> asElementIn: aParentElement havingVisited: aCollection withExtraEleme
 	anExpander
 		vFitContent;
 		hFitContent.
-	anExpander look: GtCoderExpanderLook new.
+	anExpander aptitude: GtCoderExpanderAptitude new.
 	anExpander
 		header: [ BrLabel new
-				look: BrGlamorousLabelLook new;
+				aptitude: BrGlamorousLabelAptitude new;
 				text: self gtNameOrTypeDisplayString asRopedText ].
 	anExpander
 		content: [ | content |
@@ -129,7 +129,7 @@ PP2Node >> gtSamplerFor: aView [
 		text: [ '' ];
 		actionStencil: [ :tab | 
 			BrButton new 
-				look: BrGlamorousButtonWithIconLook;
+				aptitude: BrGlamorousButtonWithIconAptitude;
 				icon: BrGlamorousVectorIcons playinspect;
 				action: [ :aButton |
 					| input context | 
@@ -151,7 +151,7 @@ PP2Node >> gtTreeFor: aView [
 		m nodes 
 			stencil: [ :each | 
 				BrLabel new 
-					look: BrGlamorousLabelLook; 
+					aptitude: BrGlamorousLabelAptitude; 
 					text: each gtDisplayString asRopedText;
 					when: BlClickEvent do: [:event | event target phlow spawnObject: each]
 		];

@@ -8,5 +8,5 @@ PP2NotNode >> asElementIn: aParentElement havingVisited: aCollection withExtraEl
 	self
 		asElementChildrenIn: aParentElement
 		havingVisited: aCollection
-		withExtraElements: (anElementsCollection copy add: (BrLabel new text: 'not'; look: (BrGlamorousLabelLook new foreground: Color gray)); yourself)
+		withExtraElements: (anElementsCollection copy add: (BrLabel new text: 'not'; aptitude: (BrGlamorousLabelAptitude new foreground: Color gray)); yourself)
 ]
