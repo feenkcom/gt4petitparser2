@@ -3,27 +3,21 @@ Extension { #name : #TPP2Context }
 { #category : #'*GToolkit4PetitParser2' }
 TPP2Context >> gtGlobalsFor: aView [
 	<gtView>
-	
 	^ aView columnedList
 		title: 'Globals';
-		column: 'Key' evaluated: [ :each | each key printString ];
-		column: 'Value' evaluated: [ :each | each value printString ];
+		column: 'Key' item: [ :each | each key printString ];
+		column: 'Value' item: [ :each | each value printString ];
 		items: [ (self globals ifNil: [ Dictionary new ]) associations ]
-
-
 ]
 
 { #category : #'*GToolkit4PetitParser2' }
 TPP2Context >> gtPropertiesFor: aView [
 	<gtView>
-	
 	^ aView columnedList
 		title: 'Properties';
-		column: 'Key' evaluated: [ :each | each key printString ];
-		column: 'Value' evaluated: [ :each | each value printString ];
+		column: 'Key' item: [ :each | each key printString ];
+		column: 'Value' item: [ :each | each value printString ];
 		items: [ (self properties ifNil: [ Dictionary new ]) associations ]
-
-
 ]
 
 { #category : #'*GToolkit4PetitParser2' }
