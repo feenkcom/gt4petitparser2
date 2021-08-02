@@ -7,9 +7,10 @@ Class {
 { #category : #baseline }
 BaselineOfGToolkit4PetitParser2 >> baseline: spec [
 	<baseline>
-	spec
-		for: #common
-		do: [
-			spec baseline: 'PetitParser2Core' with: [ spec repository: 'github://kursjan/petitparser2' ].
-			spec package: 'GToolkit4PetitParser2' with: [ spec requires: #(PetitParser2Core) ] ]
+	spec for: #'common' do: [
+		spec baseline: 'PetitParser2Core' with: [
+				spec repository: 'github://kursjan/petitparser2' ].
+		spec package: 'GToolkit4PetitParser2' with: [
+				spec requires: #('PetitParser2Core' ). ]. ].
+
 ]
