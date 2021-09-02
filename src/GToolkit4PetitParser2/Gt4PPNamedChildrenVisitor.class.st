@@ -1,10 +1,10 @@
 Class {
-	#name : #Gt4PPNamedChildrenVisitor,
-	#superclass : #PP2NoopVisitor,
-	#category : #GToolkit4PetitParser2
+	#name : 'Gt4PPNamedChildrenVisitor',
+	#superclass : 'PP2NoopVisitor',
+	#category : 'GToolkit4PetitParser2'
 }
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 Gt4PPNamedChildrenVisitor >> visitPP2Node: node [
 	| retval |
 	(self isRoot not and: [ node name isNil not ]) ifTrue: [ 

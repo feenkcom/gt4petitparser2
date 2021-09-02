@@ -1,6 +1,6 @@
-Extension { #name : #PP2TrimmingNode }
+Extension { #name : 'PP2TrimmingNode' }
 
-{ #category : #'*GToolkit4PetitParser2' }
+{ #category : '*GToolkit4PetitParser2' }
 PP2TrimmingNode >> asElementIn: aParentElement havingVisited: aCollection withExtraElements: anElementsCollection [
 "	(aCollection includes: self)
 		ifTrue: [ ^ self ].

@@ -1,11 +1,11 @@
-Extension { #name : #PP2Node }
+Extension { #name : 'PP2Node' }
 
-{ #category : #'*GToolkit4PetitParser2' }
+{ #category : '*GToolkit4PetitParser2' }
 PP2Node >> asElementChildrenIn: aParentElement havingVisited: anObject withExtraElements: anElementsCollection [
 	"by default do nothing"
 ]
 
-{ #category : #'*GToolkit4PetitParser2' }
+{ #category : '*GToolkit4PetitParser2' }
 PP2Node >> asElementContentIn: aParentElement havingVisited: aCollection withExtraElements: anElementsCollection [
 	| childrenElement nameLabel |
 	aParentElement layout: BlLinearLayout vertical.
@@ -30,7 +30,7 @@ PP2Node >> asElementContentIn: aParentElement havingVisited: aCollection withExt
 		withExtraElements: anElementsCollection.
 ]
 
-{ #category : #'*GToolkit4PetitParser2' }
+{ #category : '*GToolkit4PetitParser2' }
 PP2Node >> asElementIn: aParentElement havingVisited: aCollection withExtraElements: anElementsCollection [
 	| anExpander |
 "	(aCollection includes: self)
@@ -61,7 +61,7 @@ PP2Node >> asElementIn: aParentElement havingVisited: aCollection withExtraEleme
 		ifFalse: 	[ aParentElement addChild: (self wrap: anExpander withExtraElements: anElementsCollection) ]
 ]
 
-{ #category : #'*GToolkit4PetitParser2' }
+{ #category : '*GToolkit4PetitParser2' }
 PP2Node >> gtChildrenFor: aView [
 	<gtView>
 	^ aView tree
@@ -71,7 +71,7 @@ PP2Node >> gtChildrenFor: aView [
 		children: [:each | each children]
 ]
 
-{ #category : #'*GToolkit4PetitParser2' }
+{ #category : '*GToolkit4PetitParser2' }
 PP2Node >> gtDisplayOn: aStream [
 
 	self name isNil
@@ -80,7 +80,7 @@ PP2Node >> gtDisplayOn: aStream [
 	
 ]
 
-{ #category : #'*GToolkit4PetitParser2' }
+{ #category : '*GToolkit4PetitParser2' }
 PP2Node >> gtGraphFor: aView [
 	<gtView>
 	^ aView explicit
@@ -106,21 +106,21 @@ PP2Node >> gtGraphFor: aView [
 			parentElement asPannableElement ]
 ]
 
-{ #category : #'*GToolkit4PetitParser2' }
+{ #category : '*GToolkit4PetitParser2' }
 PP2Node >> gtNameOrTypeDisplayString [
 	^ self hasName 
 		ifTrue: [ self name ]
 		ifFalse: [ (self class name gtRemovePrefix: 'PP2') gtRemoveSuffix: 'Node' ]
 ]
 
-{ #category : #'*GToolkit4PetitParser2' }
+{ #category : '*GToolkit4PetitParser2' }
 PP2Node >> gtNamedChildren [
 	"Answer the named children of the receiver."
 
 	^ Gt4PPNamedChildrenVisitor new visit: self
 ]
 
-{ #category : #'*GToolkit4PetitParser2' }
+{ #category : '*GToolkit4PetitParser2' }
 PP2Node >> gtSamplerFor: aView [
 	<gtView>
 	^ aView textEditor
@@ -141,7 +141,7 @@ PP2Node >> gtSamplerFor: aView [
 					aButton phlow spawnObject: context ] ]
 ]
 
-{ #category : #'*GToolkit4PetitParser2' }
+{ #category : '*GToolkit4PetitParser2' }
 PP2Node >> gtTreeFor: aView [
 	<gtView>
 	^ aView mondrian 
@@ -179,7 +179,7 @@ PP2Node >> gtTreeFor: aView [
 		]
 ]
 
-{ #category : #'*GToolkit4PetitParser2' }
+{ #category : '*GToolkit4PetitParser2' }
 PP2Node >> wrap: content withExtraElements: anElementCollection [
 	| extraElement container |
 	container := BlElement new

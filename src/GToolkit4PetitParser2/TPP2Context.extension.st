@@ -1,26 +1,26 @@
-Extension { #name : #TPP2Context }
+Extension { #name : 'TPP2Context' }
 
-{ #category : #'*GToolkit4PetitParser2' }
+{ #category : '*GToolkit4PetitParser2' }
 TPP2Context >> gtGlobalsFor: aView [
 	<gtView>
 	^ aView columnedList
 		title: 'Globals';
-		column: 'Key' item: [ :each | each key printString ];
-		column: 'Value' item: [ :each | each value printString ];
+		column: 'Key' text: [ :each | each key printString ];
+		column: 'Value' text: [ :each | each value printString ];
 		items: [ (self globals ifNil: [ Dictionary new ]) associations ]
 ]
 
-{ #category : #'*GToolkit4PetitParser2' }
+{ #category : '*GToolkit4PetitParser2' }
 TPP2Context >> gtPropertiesFor: aView [
 	<gtView>
 	^ aView columnedList
 		title: 'Properties';
-		column: 'Key' item: [ :each | each key printString ];
-		column: 'Value' item: [ :each | each value printString ];
+		column: 'Key' text: [ :each | each key printString ];
+		column: 'Value' text: [ :each | each value printString ];
 		items: [ (self properties ifNil: [ Dictionary new ]) associations ]
 ]
 
-{ #category : #'*GToolkit4PetitParser2' }
+{ #category : '*GToolkit4PetitParser2' }
 TPP2Context >> gtResultFor: aView [
 	<gtView>
 	^ aView textEditor
@@ -30,7 +30,7 @@ TPP2Context >> gtResultFor: aView [
 			action: [ :aButton | aButton phlow spawnObject: self returnValue ]
 ]
 
-{ #category : #'*GToolkit4PetitParser2' }
+{ #category : '*GToolkit4PetitParser2' }
 TPP2Context >> gtTextFor: aView [
 	<gtView>
 	

@@ -1,6 +1,6 @@
-Extension { #name : #PP2CompositeNode }
+Extension { #name : 'PP2CompositeNode' }
 
-{ #category : #'*GToolkit4PetitParser2' }
+{ #category : '*GToolkit4PetitParser2' }
 PP2CompositeNode >> buildBlankContainer: method [
 	| container |
 	container := BlElement new.
@@ -18,7 +18,7 @@ PP2CompositeNode >> buildBlankContainer: method [
 	^ container
 ]
 
-{ #category : #'*GToolkit4PetitParser2' }
+{ #category : '*GToolkit4PetitParser2' }
 PP2CompositeNode >> buildBottomResizerFor: blankContainer [
 	^  BlElement new
 			aptitude: BrGlamorousResizerBottomBarAptitude new;
@@ -28,7 +28,7 @@ PP2CompositeNode >> buildBottomResizerFor: blankContainer [
 
 ]
 
-{ #category : #'*GToolkit4PetitParser2' }
+{ #category : '*GToolkit4PetitParser2' }
 PP2CompositeNode >> buildCloseButton: gtconnector [. 
 	^ GtInspectorRoundButtonStencil new asElement
 		icon: (GtInspectorPlusIconStencil close asElement);
@@ -40,7 +40,7 @@ PP2CompositeNode >> buildCloseButton: gtconnector [.
 		action: [ :e | gtconnector removeChild: e parent ]
 ]
 
-{ #category : #'*GToolkit4PetitParser2' }
+{ #category : '*GToolkit4PetitParser2' }
 PP2CompositeNode >> buildEditor: aMethod for: gtconnector [
 	| styler editorElement text |
 				
@@ -62,7 +62,7 @@ PP2CompositeNode >> buildEditor: aMethod for: gtconnector [
 	^ editorElement
 ]
 
-{ #category : #'*GToolkit4PetitParser2' }
+{ #category : '*GToolkit4PetitParser2' }
 PP2CompositeNode >> buildRightResizerFor: blankContainer [
 	^  BlElement new
 			aptitude: BrGlamorousResizerRightBarAptitude new;
@@ -72,7 +72,7 @@ PP2CompositeNode >> buildRightResizerFor: blankContainer [
 
 ]
 
-{ #category : #'*GToolkit4PetitParser2' }
+{ #category : '*GToolkit4PetitParser2' }
 PP2CompositeNode >> editorContainer [
 	^ BlElement new
 		constraintsDo: [ :c | 
@@ -81,7 +81,7 @@ PP2CompositeNode >> editorContainer [
 		layout: BlLinearLayout new
 ]
 
-{ #category : #'*GToolkit4PetitParser2' }
+{ #category : '*GToolkit4PetitParser2' }
 PP2CompositeNode >> gtConnectionsFor: aView [
 	<gtView>
 	^ aView explicit
