@@ -1,6 +1,6 @@
-Extension { #name : #PP2PossesiveRepeatingNode }
+Extension { #name : 'PP2PossesiveRepeatingNode' }
 
-{ #category : #'*GToolkit4PetitParser2' }
+{ #category : '*GToolkit4PetitParser2' }
 PP2PossesiveRepeatingNode >> asElementIn: aParentElement havingVisited: aCollection withExtraElements: anElementsCollection [
 	| wrapper content |
 	wrapper := BlElement new

@@ -1,10 +1,10 @@
 Class {
-	#name : #GtCoderExpandablePetitParserProductionStyler,
-	#superclass : #GtRBASTStyler,
-	#category : #GToolkit4PetitParser2
+	#name : 'GtCoderExpandablePetitParserProductionStyler',
+	#superclass : 'GtRBASTStyler',
+	#category : 'GToolkit4PetitParser2'
 }
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 GtCoderExpandablePetitParserProductionStyler >> visitInstanceVariableNode: aIVNode [
 	super visitInstanceVariableNode: aIVNode.
 	(aIVNode methodNode methodClass canPerform: aIVNode name)

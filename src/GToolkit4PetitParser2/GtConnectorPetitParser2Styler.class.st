@@ -1,24 +1,24 @@
 Class {
-	#name : #GtConnectorPetitParser2Styler,
-	#superclass : #BrRBTextStyler,
+	#name : 'GtConnectorPetitParser2Styler',
+	#superclass : 'BrRBTextStyler',
 	#instVars : [
 		'action',
 		'previousLinks'
 	],
-	#category : #GToolkit4PetitParser2
+	#category : 'GToolkit4PetitParser2'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GtConnectorPetitParser2Styler >> action [
 	^ action
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GtConnectorPetitParser2Styler >> action: anObject [
 	action := anObject
 ]
 
-{ #category : #moldability }
+{ #category : 'moldability' }
 GtConnectorPetitParser2Styler >> extraStyle: aText ast: ast [
 	| selfSendsExamples |
 	
@@ -42,31 +42,31 @@ GtConnectorPetitParser2Styler >> extraStyle: aText ast: ast [
 	
 ]
 
-{ #category : #moldability }
+{ #category : 'moldability' }
 GtConnectorPetitParser2Styler >> findCachedProductionReferencesIn: anAST [
 	^ anAST allChildren asSet asArray select: [ :each | 
 		each isVariable and: [ 
 			(anAST methodNode methodClass canPerform: each name) ] ]
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 GtConnectorPetitParser2Styler >> initialize [
 	super initialize.
 
 	previousLinks := OrderedCollection new
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GtConnectorPetitParser2Styler >> links [
 	^ self previousLinks
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GtConnectorPetitParser2Styler >> previousLinks [
 	^ previousLinks
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GtConnectorPetitParser2Styler >> previousLinks: anObject [
 	previousLinks := anObject
 ]
