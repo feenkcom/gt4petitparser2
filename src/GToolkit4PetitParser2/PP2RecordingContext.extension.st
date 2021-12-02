@@ -1,6 +1,6 @@
-Extension { #name : 'PP2RecordingContext' }
+Extension { #name : #PP2RecordingContext }
 
-{ #category : '*GToolkit4PetitParser2' }
+{ #category : #'*GToolkit4PetitParser2' }
 PP2RecordingContext >> gtCacheReportFor: aView [
 	<gtView>
 	^ aView columnedList
@@ -11,7 +11,7 @@ PP2RecordingContext >> gtCacheReportFor: aView [
 		items: [ self asCacheReport ]
 ]
 
-{ #category : '*GToolkit4PetitParser2' }
+{ #category : #'*GToolkit4PetitParser2' }
 PP2RecordingContext >> gtEventsTableFor: aView [
 	<gtView>
 	^ aView columnedList
@@ -23,7 +23,7 @@ PP2RecordingContext >> gtEventsTableFor: aView [
 		items: [ self eventsTable ]
 ]
 
-{ #category : '*GToolkit4PetitParser2' }
+{ #category : #'*GToolkit4PetitParser2' }
 PP2RecordingContext >> gtTallyFor: composite [
 	<gtView>
 	^ composite columnedList

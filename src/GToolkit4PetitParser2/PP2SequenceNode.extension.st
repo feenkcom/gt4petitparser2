@@ -1,6 +1,6 @@
-Extension { #name : 'PP2SequenceNode' }
+Extension { #name : #PP2SequenceNode }
 
-{ #category : '*GToolkit4PetitParser2' }
+{ #category : #'*GToolkit4PetitParser2' }
 PP2SequenceNode >> asElementChildrenIn: aParentElement havingVisited: aCollection withExtraElements: anElementsCollection [
 	aParentElement 
 		layout: (BlLinearLayout horizontal cellSpacing: 10);
@@ -13,7 +13,7 @@ PP2SequenceNode >> asElementChildrenIn: aParentElement havingVisited: aCollectio
 				withExtraElements: anElementsCollection ]
 ]
 
-{ #category : '*GToolkit4PetitParser2' }
+{ #category : #'*GToolkit4PetitParser2' }
 PP2SequenceNode >> asElementIn: aParentElement havingVisited: aCollection withExtraElements: anElementsCollection [
 "	(aCollection includes: self)
 		ifTrue: [ ^ self ].
@@ -24,7 +24,7 @@ PP2SequenceNode >> asElementIn: aParentElement havingVisited: aCollection withEx
 		withExtraElements: anElementsCollection
 ]
 
-{ #category : '*GToolkit4PetitParser2' }
+{ #category : #'*GToolkit4PetitParser2' }
 PP2SequenceNode >> gtDisplayOn: aStream [
 	aStream nextPut: $,
 ]

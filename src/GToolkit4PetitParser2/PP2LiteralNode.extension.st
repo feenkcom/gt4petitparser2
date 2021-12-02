@@ -1,6 +1,6 @@
-Extension { #name : 'PP2LiteralNode' }
+Extension { #name : #PP2LiteralNode }
 
-{ #category : '*GToolkit4PetitParser2' }
+{ #category : #'*GToolkit4PetitParser2' }
 PP2LiteralNode >> asElementIn: aParentElement havingVisited: aCollection withExtraElements: anElementsCollection [
 	| label |
 	label := BrLabel new
@@ -13,14 +13,14 @@ PP2LiteralNode >> asElementIn: aParentElement havingVisited: aCollection withExt
 	aParentElement addChild: (self wrap: label withExtraElements: anElementsCollection)
 ]
 
-{ #category : '*GToolkit4PetitParser2' }
+{ #category : #'*GToolkit4PetitParser2' }
 PP2LiteralNode >> gtDisplayOn: aStream [
 	aStream nextPut: $'.
 	aStream nextPutAll: literal asString.
 	aStream nextPut: $'
 ]
 
-{ #category : '*GToolkit4PetitParser2' }
+{ #category : #'*GToolkit4PetitParser2' }
 PP2LiteralNode >> gtNameOrTypeDisplayString [ 
 	^ self gtDisplayString
 ]

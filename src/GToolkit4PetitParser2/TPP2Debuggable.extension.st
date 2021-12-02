@@ -1,6 +1,6 @@
-Extension { #name : 'TPP2Debuggable' }
+Extension { #name : #TPP2Debuggable }
 
-{ #category : '*GToolkit4PetitParser2' }
+{ #category : #'*GToolkit4PetitParser2' }
 TPP2Debuggable >> gtTreeFor: aView [
 	<gtView>
 	self debugResult children isEmpty ifTrue: [ ^ aView empty ].

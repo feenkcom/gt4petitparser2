@@ -1,6 +1,6 @@
-Extension { #name : 'PP2OptionalNode' }
+Extension { #name : #PP2OptionalNode }
 
-{ #category : '*GToolkit4PetitParser2' }
+{ #category : #'*GToolkit4PetitParser2' }
 PP2OptionalNode >> asElementIn: aParentElement havingVisited: aCollection withExtraElements: anElementsCollection [
 "	(aCollection includes: self)
 		ifTrue: [ ^ self ].
