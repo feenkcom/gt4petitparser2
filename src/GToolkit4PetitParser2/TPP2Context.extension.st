@@ -1,6 +1,6 @@
-Extension { #name : 'TPP2Context' }
+Extension { #name : #TPP2Context }
 
-{ #category : '*GToolkit4PetitParser2' }
+{ #category : #'*GToolkit4PetitParser2' }
 TPP2Context >> gtGlobalsFor: aView [
 	<gtView>
 	^ aView columnedList
@@ -10,7 +10,7 @@ TPP2Context >> gtGlobalsFor: aView [
 		items: [ (self globals ifNil: [ Dictionary new ]) associations ]
 ]
 
-{ #category : '*GToolkit4PetitParser2' }
+{ #category : #'*GToolkit4PetitParser2' }
 TPP2Context >> gtPropertiesFor: aView [
 	<gtView>
 	^ aView columnedList
@@ -20,7 +20,7 @@ TPP2Context >> gtPropertiesFor: aView [
 		items: [ (self properties ifNil: [ Dictionary new ]) associations ]
 ]
 
-{ #category : '*GToolkit4PetitParser2' }
+{ #category : #'*GToolkit4PetitParser2' }
 TPP2Context >> gtResultFor: aView [
 	<gtView>
 	^ aView textEditor
@@ -30,7 +30,7 @@ TPP2Context >> gtResultFor: aView [
 			action: [ :aButton | aButton phlow spawnObject: self returnValue ]
 ]
 
-{ #category : '*GToolkit4PetitParser2' }
+{ #category : #'*GToolkit4PetitParser2' }
 TPP2Context >> gtTextFor: aView [
 	<gtView>
 	

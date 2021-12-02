@@ -1,6 +1,6 @@
-Extension { #name : 'PP2Token' }
+Extension { #name : #PP2Token }
 
-{ #category : '*GToolkit4PetitParser2' }
+{ #category : #'*GToolkit4PetitParser2' }
 PP2Token >> gtSourceFor: aView [
 	<gtView>
 	^ aView explicit
