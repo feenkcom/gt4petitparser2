@@ -48,3 +48,10 @@ PP2DebugResult >> gtStreamStateFor: aView [
 					  (contents lineNumberCorrespondingToIndex: self start) ].
 			  e ]
 ]
+
+{ #category : #'*GToolkit4PetitParser2' }
+PP2DebugResult >> topMostParent [
+	^ self parent isNil
+		ifTrue: [ self ]
+		ifFalse: [ self parent ]
+]
