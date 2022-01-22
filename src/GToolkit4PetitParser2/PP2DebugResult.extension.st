@@ -35,8 +35,11 @@ PP2DebugResult >> gtStreamStateFor: aView [
 			  contents := self contents.
 			  aText := contents asRopedText.
 			  (self start notNil and: [ self stop notNil ]) ifTrue: [ 
-					  (aText from: self start to: self stop) highlight:
+					  (aText from: (self start max: 1) to: (self stop max: 1)) highlight:
 							  BrGlamorousColors successBackgroundColor ].
+				self stop notNil ifTrue: [ 
+					(aText from: (self stop max: 1) to: (self stop max: 1))
+						attribute: (GtPlaygroundEvaluatedCodeButtonAttribute new beAppend result: self) ].
 			  e := BrEditor new
 				       text: aText;
 				       aptitude: BrGlamorousCodeEditorAptitude new.
