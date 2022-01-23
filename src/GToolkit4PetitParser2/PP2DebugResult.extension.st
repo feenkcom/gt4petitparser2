@@ -22,3 +22,36 @@ PP2DebugResult >> gtFormattedText [
 	].
 	^ self gtDisplayWithoutResults asRopedText
 ]
+
+{ #category : #'*GToolkit4PetitParser2' }
+PP2DebugResult >> gtStreamStateFor: aView [
+
+	<gtView>
+	^ aView explicit
+		  title: 'Stream State';
+		  priority: 1;
+		  stencil: [ 
+			  | aText e contents |
+			  contents := self contents.
+			  aText := contents asRopedText.
+			  (self start notNil and: [ self stop notNil ]) ifTrue: [ 
+					  (aText from: (self start max: 1) to: (self stop max: 1)) highlight:
+							  BrGlamorousColors successBackgroundColor ].
+				self stop notNil ifTrue: [ 
+					(aText from: (self stop max: 1) to: (self stop max: 1))
+						attribute: (GtPlaygroundEvaluatedCodeButtonAttribute new beAppend result: self) ].
+			  e := BrEditor new
+				       text: aText;
+				       aptitude: BrGlamorousCodeEditorAptitude new.
+			  self start notNil ifTrue: [ 
+				  e scrollToPosition:
+					  (contents lineNumberCorrespondingToIndex: self start) ].
+			  e ]
+]
+
+{ #category : #'*GToolkit4PetitParser2' }
+PP2DebugResult >> topMostParent [
+	^ self parent isNil
+		ifTrue: [ self ]
+		ifFalse: [ self parent ]
+]
