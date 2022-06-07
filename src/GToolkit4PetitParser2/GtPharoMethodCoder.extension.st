@@ -5,9 +5,7 @@ GtPharoMethodCoder >> petitParserProductionAstFor: anAST into: coderAddOns [
 	<gtAstCoderAddOns: 10>
 	
 	(self behavior inheritsFrom: PP2CompositeNode)
-		ifFalse: [ coderAddOns removeStylerOfType: GtCoderExpandablePetitParserProductionStyler.
-			coderAddOns removeContextAction: 'Inspect parser' translated.
-			^ self ].
+		ifFalse: [ ^ self ].
 	coderAddOns addStyler: GtCoderExpandablePetitParserProductionStyler new.
 	coderAddOns
 		addContextAction: 'Inspect parser' translated
