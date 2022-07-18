@@ -10,58 +10,55 @@ PP2Node >> asElementContentIn: aParentElement havingVisited: aCollection withExt
 	| childrenElement nameLabel |
 	aParentElement layout: BlLinearLayout vertical.
 	nameLabel := BrLabel new
-			text: self gtNameOrTypeDisplayString asRopedText;
-			margin: (BlInsets bottom: 10);
-			when: BlClickEvent do: [ :event | aParentElement phlow spawnObject: self ].
+		aptitude: BrGlamorousLabelAptitude new;
+		text: self gtNameOrTypeDisplayString asRopedText;
+		margin: (BlInsets bottom: 10);
+		when: BlClickEvent do: [ :event | aParentElement phlow spawnObject: self ].
 	aParentElement addChild: nameLabel.
 	childrenElement := BlElement new
-			constraintsDo: [ :c | 
-				c vertical fitContent.
-				c horizontal fitContent ];
-			layout: BlLinearLayout horizontal alignCenter.
+		constraintsDo: [ :c | 
+			c vertical fitContent.
+			c horizontal fitContent ];
+		layout: BlLinearLayout horizontal alignCenter.
 	aParentElement addChild: childrenElement.
 	self
 		asElementChildrenIn: childrenElement
-		havingVisited: (aCollection copy
+		havingVisited:
+			(aCollection copy
 				add: self;
 				yourself)
-		withExtraElements: anElementsCollection
+		withExtraElements: anElementsCollection.
 ]
 
 { #category : #'*GToolkit4PetitParser2' }
 PP2Node >> asElementIn: aParentElement havingVisited: aCollection withExtraElements: anElementsCollection [
 	| anExpander |
-	"	(aCollection includes: self)
+"	(aCollection includes: self)
 		ifTrue: [ ^ self ].
-"
-	anExpander := BrExpander new.
+"	anExpander := BrExpander new.
 	anExpander
 		vFitContent;
 		hFitContent.
 	anExpander aptitude: GtCoderExpanderAptitude new.
 	anExpander
-		header: [ BrLabel new text: self gtNameOrTypeDisplayString asRopedText ].
+		header: [ BrLabel new
+				aptitude: BrGlamorousLabelAptitude new;
+				text: self gtNameOrTypeDisplayString asRopedText ].
 	anExpander
 		content: [ | content |
 			content := BlElement new
-					constraintsDo: [ :c | 
-						c vertical fitContent.
-						c horizontal fitContent ].
+				constraintsDo: [ :c | 
+					c vertical fitContent.
+					c horizontal fitContent ].
 			self
 				asElementContentIn: content
 				havingVisited: aCollection
 				withExtraElements: OrderedCollection new.
-			content ].
-	anExpander
-		margin: (BlInsets
-				top: 1
-				left: 1
-				bottom: 1
-				right: 1).
+			content].
+	anExpander margin: (BlInsets top: 1 left: 1 bottom: 1 right: 1).
 	anElementsCollection isEmpty
 		ifTrue: [ aParentElement addChild: anExpander ]
-		ifFalse: [ aParentElement
-				addChild: (self wrap: anExpander withExtraElements: anElementsCollection) ]
+		ifFalse: 	[ aParentElement addChild: (self wrap: anExpander withExtraElements: anElementsCollection) ]
 ]
 
 { #category : #'*GToolkit4PetitParser2' }
@@ -147,32 +144,39 @@ PP2Node >> gtSamplerFor: aView [
 { #category : #'*GToolkit4PetitParser2' }
 PP2Node >> gtTreeFor: aView [
 	<gtView>
-	^ aView mondrian
+	^ aView mondrian 
 		title: 'Tree';
 		priority: 20;
-		painting: [ :m | 
-			m nodes
-				stencil: [ :each | 
-					BrLabel new
-						text: each gtDisplayString asRopedText;
-						when: BlClickEvent do: [ :event | event target phlow spawnObject: each ] ];
-				with: (self withDeepCollect: #children as: Set).
-			m edges
-				stencil: [ BlParabollaArcElement new
-						zIndex: -1;
-						curvatureFraction: 0.2;
-						border: (BlBorder paint: (Color lightGray alpha: 0.5) width: 1);
-						toHead: (BlArrowheadSimpleArrow new
+		painting: [:m | 
+		m nodes 
+			stencil: [ :each | 
+				BrLabel new 
+					aptitude: BrGlamorousLabelAptitude; 
+					text: each gtDisplayString asRopedText;
+					when: BlClickEvent do: [:event | event target phlow spawnObject: each]
+		];
+			with: (self withDeepCollect: #children as: Set).
+		m edges 
+			stencil: [ 
+				BlParabollaArcElement new
+					zIndex: -1;
+					curvatureFraction: 0.2;
+					border: (BlBorder paint: (Color lightGray alpha: 0.5) width: 1);
+						toHead:
+							(BlArrowheadSimpleArrow new
 								arrowLengthFraction: 5;
 								arrowNoseAngle: 60;
-								border: (BlBorder builder
+								border:
+									(BlBorder builder
 										paint: (Color lightGray alpha: 0.5);
-										width: 1;
-										build)) ];
-				fromRightCenter;
-				toLeftCenter;
-				connectToAll: #children.
-			m layout custom: (GtGraphHorizontalDominanceTreeLayout new horizontalGap: 30) ]
+											width: 1;
+											build)) ];
+			fromRightCenter;
+			toLeftCenter;
+			connectToAll: #children.
+		m layout custom: (GtGraphHorizontalDominanceTreeLayout new 
+				horizontalGap: 30).
+		]
 ]
 
 { #category : #'*GToolkit4PetitParser2' }
