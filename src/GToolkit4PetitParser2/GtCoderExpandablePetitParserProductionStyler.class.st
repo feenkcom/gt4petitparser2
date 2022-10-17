@@ -12,7 +12,7 @@ GtCoderExpandablePetitParserProductionStyler >> visitNamedVariable: aIVNode [
 	(self coderViewModel behavior canPerform: selector) ifFalse: [ ^ self ].
 
 	self
-		attribute: (BrGlamorousTrangleExpanderTextAttribute new
+		attribute: (BrGlamorousTriangleExpanderTextAttribute new
 				attributesCreatingBlock: [ BrTextAdornmentDynamicAttribute new
 						beAppend;
 						stencil: [ | coderElement method coder |
