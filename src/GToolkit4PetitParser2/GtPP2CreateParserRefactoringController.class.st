@@ -15,7 +15,7 @@ Class {
 
 { #category : #executing }
 GtPP2CreateParserRefactoringController >> addClassPackageAttribute [
-	| expander adornment |
+	| expander |
 	classAttribute
 		ifNotNil: [ sourceCoderViewModel removeCoderTextAttributes: classAttribute ].
 	expander := GtCreateClassExpanderAttribute new
@@ -30,9 +30,31 @@ GtPP2CreateParserRefactoringController >> addClassPackageAttribute [
 ]
 
 { #category : #accessing }
+GtPP2CreateParserRefactoringController >> cancelRefactoring [
+	renameAction ifNotNil: [ renameAction uninstall ].
+	super cancelRefactoring
+]
+
+{ #category : #accessing }
 GtPP2CreateParserRefactoringController >> category [
 	^ (package trim , (tag isEmptyOrNil ifTrue: [ '' ] ifFalse: [ '-' , tag trim ]))
 		asSymbol
+]
+
+{ #category : #accessing }
+GtPP2CreateParserRefactoringController >> cleanUp [
+	super cleanUp.
+	classAttribute
+		ifNotNil: [ sourceCoderViewModel removeCoderTextAttributes: classAttribute ]
+]
+
+{ #category : #accessing }
+GtPP2CreateParserRefactoringController >> finishRefactoring: refactoring [
+	super finishRefactoring: refactoring.
+	renameAction
+		ifNotNil: [ renameAction
+				updateSource;
+				uninstall ].
 ]
 
 { #category : #initialization }
@@ -86,12 +108,11 @@ GtPP2CreateParserRefactoringController >> refactoringName [
 
 { #category : #executing }
 GtPP2CreateParserRefactoringController >> safelyExecute [
-	| refactoring newText |
+	| refactoring |
 	refactoring := self refactoring.
 	refactoring primitiveExecute.
 	self sourceCoderViewModel selectNone.
-	newText := (className , ' new') asRopedText glamorousCodeFontAndSize.
-	self setText: newText.
+	self updateSource.
 	self installRenamer
 ]
 
@@ -117,6 +138,13 @@ GtPP2CreateParserRefactoringController >> updatePackage: aSymbol [
 GtPP2CreateParserRefactoringController >> updatePackageTag: aSymbol [
 	tag := aSymbol.
 	self addRefactoringPreview
+]
+
+{ #category : #executing }
+GtPP2CreateParserRefactoringController >> updateSource [
+	| newText |
+	newText := (className , ' new') asRopedText glamorousCodeFontAndSize.
+	self setText: newText
 ]
 
 { #category : #executing }
