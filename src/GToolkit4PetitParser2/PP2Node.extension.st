@@ -340,6 +340,11 @@ PP2Node >> gtTreeFor: aView [
 		]
 ]
 
+{ #category : #'*GToolkit4PetitParser2' }
+PP2Node >> if: aBlock [
+	^ PP2ConditionalNode on: self block: aBlock
+]
+
 { #category : #'*GToolkit4PetitParser2-YAML' }
 PP2Node >> preceeds [
 	^ self >=> [ :context :cc |
