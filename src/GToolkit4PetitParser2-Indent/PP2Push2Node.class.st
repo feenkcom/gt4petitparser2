@@ -1,11 +1,11 @@
 Class {
-	#name : #PP2PushParser,
-	#superclass : #PPDelegateParser,
+	#name : #PP2Push2Node,
+	#superclass : #PP2DelegateNode,
 	#category : #'GToolkit4PetitParser2-Indent'
 }
 
 { #category : #parsing }
-PP2PushParser >> parseOn: context [
+PP2Push2Node >> parseOn: context [
 	| result |
 	
 	result := parser parseOn: context.

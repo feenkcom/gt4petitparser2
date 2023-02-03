@@ -7,7 +7,7 @@ TPP2Context >> MPPStack [
 
 { #category : #'*GToolkit4PetitParser2-Indent' }
 TPP2Context >> column [
-	^ self stream column
+	^ "stream column" self halt
 ]
 
 { #category : #'*GToolkit4PetitParser2-Indent' }

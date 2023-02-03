@@ -1,21 +1,21 @@
 Class {
-	#name : #PP2OnsideOLParser,
-	#superclass : #PPParser,
+	#name : #PP2OnsideOLNode,
+	#superclass : #PP2Node,
 	#category : #'GToolkit4PetitParser2-Indent'
 }
 
 { #category : #analysis }
-PP2OnsideOLParser >> acceptsEpsilon [
+PP2OnsideOLNode >> acceptsEpsilon [
 	^ true
 ]
 
 { #category : #analysis }
-PP2OnsideOLParser >> firstCharSet [
+PP2OnsideOLNode >> firstCharSet [
 	^ PPCharSetPredicate on: [:e | true ] 
 ]
 
 { #category : #parsing }
-PP2OnsideOLParser >> parseOn: context [
+PP2OnsideOLNode >> parseOn: context [
 	((context indentStack topIfEmpty: 0) < context column) ifFalse: [  
 		^ PPFailure message: 'Not in onside' context: context
 	].

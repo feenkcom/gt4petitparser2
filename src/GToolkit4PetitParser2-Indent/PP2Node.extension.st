@@ -2,7 +2,7 @@ Extension { #name : #PP2Node }
 
 { #category : #'*GToolkit4PetitParser2-Indent' }
 PP2Node >> olToken [
-	^ PP2TokenOLParser on: self
+	^ PP2TokenOLNode on: self
 ]
 
 { #category : #'*GToolkit4PetitParser2-Indent' }
@@ -22,7 +22,7 @@ PP2Node >> pop [
 { #category : #'*GToolkit4PetitParser2-Indent' }
 PP2Node >> push [
 	"evaluate myself and if I dont' fail, push the result on the indent stack"
-	^ PP2PushParser on: self
+	^ PP2Push2Node on: self
 ]
 
 { #category : #'*GToolkit4PetitParser2-Indent' }

@@ -1,6 +1,6 @@
 Class {
-	#name : #PP2CompareParser,
-	#superclass : #PPParser,
+	#name : #PP2CompareNode,
+	#superclass : #PP2Node,
 	#instVars : [
 		'compareBlock',
 		'message',
@@ -10,12 +10,12 @@ Class {
 }
 
 { #category : #'as yet unclassified' }
-PP2CompareParser class >> on: compareBlock [
+PP2CompareNode class >> on: compareBlock [
 	^ self on: compareBlock message: compareBlock asString
 ]
 
 { #category : #'as yet unclassified' }
-PP2CompareParser class >> on: compareBlock message: message [
+PP2CompareNode class >> on: compareBlock message: message [
 	^ (self basicNew
 		initialize)
 		compareBlock: compareBlock ;
@@ -24,7 +24,7 @@ PP2CompareParser class >> on: compareBlock message: message [
 ]
 
 { #category : #'as yet unclassified' }
-PP2CompareParser class >> on: compareBlock message: message column: column [
+PP2CompareNode class >> on: compareBlock message: message column: column [
 	^ (self basicNew
 		initialize)
 		compareBlock: compareBlock ;
@@ -34,27 +34,27 @@ PP2CompareParser class >> on: compareBlock message: message column: column [
 ]
 
 { #category : #accessing }
-PP2CompareParser >> column [
+PP2CompareNode >> column [
 	^ column
 ]
 
 { #category : #accessing }
-PP2CompareParser >> column: anInteger [
+PP2CompareNode >> column: anInteger [
 	column := anInteger
 ]
 
 { #category : #accessing }
-PP2CompareParser >> compareBlock: aBlock [
+PP2CompareNode >> compareBlock: aBlock [
 	compareBlock := aBlock
 ]
 
 { #category : #accessing }
-PP2CompareParser >> message: aString [
+PP2CompareNode >> message: aString [
 	message := aString
 ]
 
 { #category : #parsing }
-PP2CompareParser >> parseOn: context [
+PP2CompareNode >> parseOn: context [
 	^ (compareBlock value: context) ifTrue: [  
 		compareBlock asString
 	] ifFalse: [  

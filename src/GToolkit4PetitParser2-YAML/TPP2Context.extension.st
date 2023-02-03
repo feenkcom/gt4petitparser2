@@ -39,7 +39,7 @@ TPP2Context >> YAMLN [
 { #category : #'*GToolkit4PetitParser2-YAML' }
 TPP2Context >> YAMLN: whatever [
 	| compare |
-	compare := PP2CompareParser 
+	compare := PP2CompareNode 
 					on: [ :ctx | ctx column = whatever  ] 
 					message: 'expected level: ', whatever asString
 					column: whatever.

@@ -1,6 +1,6 @@
 Class {
 	#name : #PP2PushAsParserParser,
-	#superclass : #PPDelegateParser,
+	#superclass : #PP2DelegateNode,
 	#category : #'GToolkit4PetitParser2-Indent'
 }
 
