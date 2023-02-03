@@ -25,8 +25,8 @@ GtPP2CreateParserRefactoringController >> addClassPackageAttribute [
 			yourself.
 	classAttribute := sourceCoderViewModel
 			addTextAttribute: expander
-			from: className size
-			to: className size
+			from: self indexAtEndOfClassName
+			to: self indexAtEndOfClassName
 ]
 
 { #category : #accessing }
@@ -57,6 +57,11 @@ GtPP2CreateParserRefactoringController >> finishRefactoring: refactoring [
 				uninstall ].
 ]
 
+{ #category : #executing }
+GtPP2CreateParserRefactoringController >> indexAtEndOfClassName [
+	^ (self sourceText asString indexOfSubCollection: ' new') - 1
+]
+
 { #category : #initialization }
 GtPP2CreateParserRefactoringController >> initialize [
 	super initialize.
@@ -72,7 +77,7 @@ GtPP2CreateParserRefactoringController >> installRenamer [
 	sourceCoderViewModel moveCursorTo: 0.
 
 	renameAction := GtPP2RenameVariableAction
-			locations: {1 to: className size}
+			locations: {self indexAtEndOfClassName - className size + 1 to: self indexAtEndOfClassName}
 			textualCoderViewModel: sourceCoderViewModel.
 	renameAction selectAll: true.
 	renameAction forVariableOrUnaryMessage.
@@ -83,8 +88,13 @@ GtPP2CreateParserRefactoringController >> installRenamer [
 				ifTrue: [ renameAction isValid ifTrue: [ self updateClassName: renameAction newName ] ].
 			ann eventType = #cancel ifTrue: [ self cancelRefactoring ] ].
 	renameAction install.
-	
+
 	self addClassPackageAttribute
+]
+
+{ #category : #accessing }
+GtPP2CreateParserRefactoringController >> parserStartingState [
+	^ GtPharoParser startingStateForMethodSequence
 ]
 
 { #category : #accessing }
@@ -142,8 +152,10 @@ GtPP2CreateParserRefactoringController >> updatePackageTag: aSymbol [
 
 { #category : #executing }
 GtPP2CreateParserRefactoringController >> updateSource [
-	| newText |
-	newText := (className , ' new') asRopedText glamorousCodeFontAndSize.
+	| newText ast |
+	ast := self sourceAst.
+	newText := (ast statements last variable variableName , ' := ' , className
+			, ' new') asRopedText glamorousCodeFontAndSize.
 	self setText: newText
 ]
 
