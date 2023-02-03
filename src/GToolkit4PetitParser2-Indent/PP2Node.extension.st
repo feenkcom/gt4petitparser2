@@ -6,7 +6,7 @@ PP2Node >> olToken [
 ]
 
 { #category : #'*GToolkit4PetitParser2-Indent' }
-PP2Node >> pop [
+PP2Node >> pop2 [
 	"pop myself from the indent stack, fail if I am not on top of the stack"
 	^ [:context | 
 			| retval |
@@ -20,7 +20,7 @@ PP2Node >> pop [
 ]
 
 { #category : #'*GToolkit4PetitParser2-Indent' }
-PP2Node >> push [
+PP2Node >> push2 [
 	"evaluate myself and if I dont' fail, push the result on the indent stack"
 	^ PP2Push2Node on: self
 ]
