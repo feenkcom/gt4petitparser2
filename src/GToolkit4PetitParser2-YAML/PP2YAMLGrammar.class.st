@@ -438,12 +438,12 @@ PP2YAMLGrammar >> c_ns_flow_pair_json_key_entry [
 
 { #category : #spec }
 PP2YAMLGrammar >> c_ns_properties [
-	^ PPFailingParser message: 'Properties not YET supported'
+	^ PP2FailingNode message: 'Properties not YET supported'
 ]
 
 { #category : #spec }
 PP2YAMLGrammar >> c_printable [
-	^ PPPredicateObjectParser on: (PPCharSetPredicate on: 
+	^ PP2PredicateObjectNode on: (PP2CharSetPredicate on: 
 			[ :e | e asInteger >= 32 or: [ e isSeparator ] ]) message: 'c_printable expected' 
 ]
 
@@ -718,7 +718,7 @@ PP2YAMLGrammar >> nb_double_text [
 
 { #category : #spec }
 PP2YAMLGrammar >> nb_json [
-	^ PPPredicateObjectParser on: (PPCharSetPredicate on: 
+	^ PP2PredicateObjectNode on: (PP2CharSetPredicate on: 
 			[ :e | e asInteger >= 32 or: [ e = Character tab ] ]) message: 'nb_json expected' 
 ]
 
@@ -990,7 +990,7 @@ PP2YAMLGrammar >> s_double_break [
 
 { #category : #spec }
 PP2YAMLGrammar >> s_double_escaped [
-	^ PPFailingParser message: 's_double_escaped not yet implemented'
+	^ PP2FailingNode message: 's_double_escaped not yet implemented'
 ]
 
 { #category : #spec }
