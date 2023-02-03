@@ -1,1 +1,1 @@
-Package { #name : 'BaselineOfGToolkit4PetitParser2' }
+Package { #name : #BaselineOfGToolkit4PetitParser2 }

@@ -1,10 +1,10 @@
 Class {
-	#name : 'BaselineOfGToolkit4PetitParser2',
-	#superclass : 'BaselineOf',
-	#category : 'BaselineOfGToolkit4PetitParser2'
+	#name : #BaselineOfGToolkit4PetitParser2,
+	#superclass : #BaselineOf,
+	#category : #BaselineOfGToolkit4PetitParser2
 }
 
-{ #category : 'baseline' }
+{ #category : #baseline }
 BaselineOfGToolkit4PetitParser2 >> baseline: spec [
 	<baseline>
 	spec for: #'common' do: [
