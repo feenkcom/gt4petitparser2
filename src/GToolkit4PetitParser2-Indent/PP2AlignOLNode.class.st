@@ -1,7 +1,7 @@
 Class {
 	#name : #PP2AlignOLNode,
 	#superclass : #PP2Node,
-	#category : #'GToolkit4PetitParser2-Indent'
+	#category : #'GToolkit4PetitParser2-Indent-Nodes'
 }
 
 { #category : #analysis }

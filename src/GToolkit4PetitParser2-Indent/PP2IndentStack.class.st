@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'contents'
 	],
-	#category : #'GToolkit4PetitParser2-Indent'
+	#category : #'GToolkit4PetitParser2-Indent-Nodes'
 }
 
 { #category : #comparison }
