@@ -1,7 +1,7 @@
 Class {
 	#name : #PP2TokenOLNode,
 	#superclass : #PP2CreateTokenNode,
-	#category : #'GToolkit4PetitParser2-Indent'
+	#category : #'GToolkit4PetitParser2-Indent-Nodes'
 }
 
 { #category : #parsing }
