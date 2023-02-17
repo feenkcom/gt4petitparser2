@@ -62,6 +62,11 @@ PP2Node >> asElementIn: aParentElement havingVisited: aCollection withExtraEleme
 ]
 
 { #category : #'*GToolkit4PetitParser2' }
+PP2Node >> displayName [
+	^ self gtDisplayString
+]
+
+{ #category : #'*GToolkit4PetitParser2' }
 PP2Node >> gtChildrenFor: aView [
 	<gtView>
 	^ aView tree
