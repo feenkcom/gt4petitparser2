@@ -6,10 +6,15 @@ Class {
 		'term',
 		'prod',
 		'prim',
-		'start'
+		'expression'
 	],
 	#category : #'GToolkit4PetitParser2-Tutorial'
 }
+
+{ #category : #grammar }
+TermPParser >> expression [
+	^ term end
+]
 
 { #category : #grammar }
 TermPParser >> number [
@@ -30,7 +35,7 @@ TermPParser >> prod [
 
 { #category : #accessing }
 TermPParser >> start [
-	^ term end
+	^ expression
 ]
 
 { #category : #grammar }
