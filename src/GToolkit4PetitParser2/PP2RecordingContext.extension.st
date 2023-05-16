@@ -15,7 +15,7 @@ PP2RecordingContext >> gtCacheReportFor: aView [
 PP2RecordingContext >> gtEventsTableFor: aView [
 	<gtView>
 	^ aView columnedList
-		title: 'Events Table';
+		title: 'Events table';
 		column: 'Position' text: [ :each | each first printString ];
 		column: 'Event' text: [ :each | each second printString ];
 		column: 'Strategy' text: [ :each | each third printString ];
@@ -27,7 +27,7 @@ PP2RecordingContext >> gtEventsTableFor: aView [
 PP2RecordingContext >> gtTallyFor: composite [
 	<gtView>
 	^ composite columnedList
-		title: 'Global Tally';
+		title: 'Global tally';
 		column: 'Strategy' text: [ :each | each first gtDisplayString ];
 		column: 'Count' text: [ :each | each second printString ];
 		column: 'Percentage (%)' text: [ :each | each third printString ];

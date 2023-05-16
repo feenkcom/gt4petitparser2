@@ -28,7 +28,7 @@ PP2DebugResult >> gtStreamStateFor: aView [
 
 	<gtView>
 	^ aView explicit
-		  title: 'Stream State';
+		  title: 'Stream state';
 		  priority: 1;
 		  stencil: [ 
 			  | aText e contents |
@@ -47,6 +47,19 @@ PP2DebugResult >> gtStreamStateFor: aView [
 				  e scrollToPosition:
 					  (contents lineNumberCorrespondingToIndex: self start) ].
 			  e ]
+]
+
+{ #category : #'*GToolkit4PetitParser2' }
+PP2DebugResult >> gtTreeFor: aView [
+	<gtView>
+	self debugResult children isEmpty ifTrue: [ ^ aView empty ].
+	^ aView columnedTree
+		title: 'Execution traces';
+		items: [ {self debugResult children first} ];
+		column: 'Parser' text: [ :debuggerResult | debuggerResult gtFormattedText ];
+		column: 'Value' text: [ :debuggerResult | 
+			debuggerResult result printStringLimitedTo: 50 ];
+		children: [ :debuggerResult | debuggerResult children ]
 ]
 
 { #category : #'*GToolkit4PetitParser2' }
