@@ -1,7 +1,7 @@
-Extension { #name : #TPP2Debuggable }
+Extension { #name : #PP2InMemoryContext }
 
 { #category : #'*GToolkit4PetitParser2' }
-TPP2Debuggable >> gtTreeFor: aView [
+PP2InMemoryContext >> gtTreeFor: aView [
 	<gtView>
 	self debugResult children isEmpty ifTrue: [ ^ aView empty ].
 	^ aView columnedTree
