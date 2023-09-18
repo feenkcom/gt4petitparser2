@@ -5,7 +5,9 @@ Class {
 }
 
 { #category : #accessing }
-GtPP2RenameVariableAction >> accept [
+GtPP2RenameVariableAction >> initialize [
+	super initialize.
+	allowAccept := false
 ]
 
 { #category : #accessing }
