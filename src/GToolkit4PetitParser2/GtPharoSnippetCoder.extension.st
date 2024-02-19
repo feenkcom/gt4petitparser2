@@ -27,7 +27,7 @@ GtPharoSnippetCoder >> addCreatePetitParserMenuItem: anAst to: coderAddOns from:
 	(nodeVariables allSatisfy: [ :each | each size = 1 ]) ifFalse: [ ^ self ].
 	coderAddOns
 		addContextMenuItem: 'Extract PetitParser class'
-		action: [ :aTextualViewModel | 
+		action: [ :aTextualViewModel :element | 
 			(GtPP2CreateParserRefactoringController new
-				sourceCoderViewModel: aTextualViewModel) execute ]
+				sourceCoderViewModel: aTextualViewModel) executeIn: element ]
 ]
