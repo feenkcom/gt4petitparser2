@@ -19,9 +19,9 @@ GtPharoSourceCoder >> extractProduction: anAst to: coderAddOns from: aCoderViewM
 						from: nodes first startPosition
 						to: nodes last stopPosition ]
 				leave: self removeHighlightBlock
-				action: [ :aTextualViewModel | 
+				action: [ :aTextualViewModel :element | 
 					(GtPP2ExtractProductionRefactoringController new
-						sourceCoderViewModel: aTextualViewModel) execute ] ]
+						sourceCoderViewModel: aTextualViewModel) executeIn: element ] ]
 ]
 
 { #category : #'*GToolkit4PetitParser2' }
@@ -46,8 +46,8 @@ GtPharoSourceCoder >> inlineProduction: anAst to: coderAddOns from: aCoderViewMo
 						from: node startPosition
 						to: node stopPosition ]
 				leave: self removeHighlightBlock
-				action: [ :aTextualViewModel | 
+				action: [ :aTextualViewModel :element | 
 					(GtPP2InlineProductionRefactoringController new
 						sourceCoderViewModel: aTextualViewModel;
-						variableNode: node) execute ] ]
+						variableNode: node) executeIn: element ] ]
 ]
