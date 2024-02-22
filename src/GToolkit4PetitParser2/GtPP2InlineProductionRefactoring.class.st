@@ -8,6 +8,11 @@ Class {
 }
 
 { #category : #accessing }
+GtPP2InlineProductionRefactoring >> gtDescription [
+	^ 'Inline PP2 production ' , variableName
+]
+
+{ #category : #accessing }
 GtPP2InlineProductionRefactoring >> hasVariableReference [
 	(class whoDefinesInstanceVariable: variableName) withAllSubclasses
 		do: [ :each | 
