@@ -83,6 +83,11 @@ GtPP2CreateParserRefactoring >> createStartMethod [
 		classified: #accessing
 ]
 
+{ #category : #accessing }
+GtPP2CreateParserRefactoring >> gtDescription [
+	^ 'Create PP2 class ' , className
+]
+
 { #category : #transforming }
 GtPP2CreateParserRefactoring >> ppClass [
 	^ self model classNamed: className
