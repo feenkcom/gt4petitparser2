@@ -33,32 +33,30 @@ PP2Node >> asElementContentIn: aParentElement havingVisited: aCollection withExt
 { #category : #'*GToolkit4PetitParser2' }
 PP2Node >> asElementIn: aParentElement havingVisited: aCollection withExtraElements: anElementsCollection [
 	| anExpander |
-"	(aCollection includes: self)
+	"	(aCollection includes: self)
 		ifTrue: [ ^ self ].
-"	anExpander := BrExpander new.
-	anExpander
-		vFitContent;
-		hFitContent.
-	anExpander aptitude: GtCoderExpanderAptitude new.
-	anExpander
-		header: [ BrLabel new
-				aptitude: BrGlamorousLabelAptitude new;
-				text: self gtNameOrTypeDisplayString asRopedText ].
-	anExpander
-		content: [ | content |
-			content := BlElement new
-				constraintsDo: [ :c | 
-					c vertical fitContent.
-					c horizontal fitContent ].
-			self
-				asElementContentIn: content
-				havingVisited: aCollection
-				withExtraElements: OrderedCollection new.
-			content].
-	anExpander margin: (BlInsets top: 1 left: 1 bottom: 1 right: 1).
+"
+	anExpander := BrExpander new
+			fitContent;
+			aptitude: GtCoderExpanderAptitude new;
+			margin: (BlInsets all: 1);
+			header: [ BrLabel new
+					aptitude: BrGlamorousLabelAptitude new;
+					text: self gtNameOrTypeDisplayString ];
+			content: [ | content |
+				content := BlElement new
+						constraintsDo: [ :c | 
+							c vertical fitContent.
+							c horizontal fitContent ].
+				self
+					asElementContentIn: content
+					havingVisited: aCollection
+					withExtraElements: OrderedCollection new.
+				content ].
 	anElementsCollection isEmpty
 		ifTrue: [ aParentElement addChild: anExpander ]
-		ifFalse: 	[ aParentElement addChild: (self wrap: anExpander withExtraElements: anElementsCollection) ]
+		ifFalse: [ aParentElement
+				addChild: (self wrap: anExpander withExtraElements: anElementsCollection) ]
 ]
 
 { #category : #'*GToolkit4PetitParser2' }
@@ -108,7 +106,7 @@ PP2Node >> gtGraphFor: aView [
 				asElementIn: parentElement
 				havingVisited: OrderedCollection new
 				withExtraElements: OrderedCollection new.
-			parentElement asPannableElement ]
+			parentElement asScalableElement maxScale: 1 ]
 ]
 
 { #category : #'*GToolkit4PetitParser2' }
@@ -149,39 +147,33 @@ PP2Node >> gtSamplerFor: aView [
 { #category : #'*GToolkit4PetitParser2' }
 PP2Node >> gtTreeFor: aView [
 	<gtView>
-	^ aView mondrian 
+	^ aView mondrian
 		title: 'Tree';
 		priority: 20;
-		painting: [:m | 
-		m nodes 
-			stencil: [ :each | 
-				BrLabel new 
-					aptitude: BrGlamorousLabelAptitude; 
-					text: each gtDisplayString asRopedText;
-					when: BlClickEvent do: [:event | event target phlow spawnObject: each]
-		];
-			with: (self withDeepCollect: #children as: Set).
-		m edges 
-			stencil: [ 
-				BlParabollaArcElement new
-					zIndex: -1;
-					curvatureFraction: 0.2;
-					border: (BlBorder paint: (Color lightGray alpha: 0.5) width: 1);
-						toHead:
-							(BlArrowheadSimpleArrow new
+		painting: [ :m | 
+			m nodes
+				stencil: [ :each | 
+					BrLabel new
+						aptitude: BrGlamorousLabelAptitude new + BrShadowAptitude new;
+						text: each gtDisplayString asRopedText;
+						background: Color white;
+						margin: (BlInsets all: 10);
+						padding: (BlInsets all: 5);
+						when: BlClickEvent do: [ :event | event target phlow spawnObject: each ] ];
+				with: (self withDeepCollect: #children as: Set).
+			m edges
+				stencil: [ BlParabollaArcElement new
+						zIndex: -1;
+						curvatureFraction: 0.2;
+						border: (Color lightGray alpha: 0.5);
+						toHead: (BlArrowheadSimpleArrow new
 								arrowLengthFraction: 5;
 								arrowNoseAngle: 60;
-								border:
-									(BlBorder builder
-										paint: (Color lightGray alpha: 0.5);
-											width: 1;
-											build)) ];
-			fromRightCenter;
-			toLeftCenter;
-			connectToAll: #children.
-		m layout custom: (GtGraphHorizontalDominanceTreeLayout new 
-				horizontalGap: 30).
-		]
+								border: (Color lightGray alpha: 0.5)) ];
+				fromRightCenter;
+				toLeftCenter;
+				connectToAll: #children.
+			m layout horizontalDominanceTree levelDistance: 30; nodeDistance: 5 ]
 ]
 
 { #category : #'*GToolkit4PetitParser2' }
