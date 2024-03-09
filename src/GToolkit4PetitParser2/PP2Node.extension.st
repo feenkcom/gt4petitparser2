@@ -67,11 +67,14 @@ PP2Node >> displayName [
 { #category : #'*GToolkit4PetitParser2' }
 PP2Node >> gtChildrenFor: aView [
 	<gtView>
-	^ aView tree
+	^ aView columnedTree
 		title: 'Children';
 		priority: 15;
 		items: [ self children ];
-		children: [:each | each children]
+		children: [ :each | each children ];
+		column: 'Parser' text: #gtDisplayString;
+		column: 'Type'
+			text: [ :each | each class name asRopedText foreground: Color gray ]
 ]
 
 { #category : #'*GToolkit4PetitParser2' }
