@@ -139,7 +139,7 @@ PP2Node >> gtSamplerFor: aView [
 				icon: BrGlamorousVectorIcons playinspect;
 				action: [ :aButton |
 					| input context | 
-					input := (tab viewContentElement childAt: 1) text asString.
+					input := (tab viewContentElement childWithId: #editor) text asString.
 					context := PP2RecordingContext new.
 					(self 
 						deoptimize;
