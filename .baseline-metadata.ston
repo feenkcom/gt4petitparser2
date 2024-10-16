@@ -1,1 +1,5 @@
-{	"repositories" : {		"github://kursjan/petitparser2" : "975fa5b62fbb0c87f89c156b97e9682506cc1e99"	}}
+{
+	"repositories" : {
+		"github://feenkcom/petitparser2" : "8b8114fedc5f53040601d5c2ff9ae06df26dd1b2"
+	}
+}
