@@ -13,6 +13,7 @@ GtPharoSourceCoder >> extractProduction: anAst to: coderAddOns from: aCoderViewM
 				ifTrue: [ ^ self ].
 			coderAddOns
 				addContextMenuItem: 'Extract production'
+				group: BrMenuItemGroupConfiguration refactoring
 				hover: [ :textualCoderViewModel | 
 					textualCoderViewModel
 						addTextAttribute: self class nodeHighlight
@@ -40,6 +41,7 @@ GtPharoSourceCoder >> inlineProduction: anAst to: coderAddOns from: aCoderViewMo
 				addContextMenuItem: (self
 						createLabel: 'Inline production'
 						description: node source)
+				group: BrMenuItemGroupConfiguration refactoring
 				hover: [ :textualCoderViewModel | 
 					textualCoderViewModel
 						addTextAttribute: self class nodeHighlight
