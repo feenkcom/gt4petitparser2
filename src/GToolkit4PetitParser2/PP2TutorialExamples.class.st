@@ -10,6 +10,7 @@ Class {
 { #category : #accessing }
 PP2TutorialExamples >> identifier [
 	<gtExample>
+	<return: #PP2SequenceNode>
 	| identifier |
 	identifier := #letter asPParser , #word asPParser star.
 	^ identifier
@@ -18,6 +19,7 @@ PP2TutorialExamples >> identifier [
 { #category : #accessing }
 PP2TutorialExamples >> identifierFlatten [
 	<gtExample>
+	<return: #PP2FlattenNode>
 	| identifier |
 	identifier := self identifier.
 	^ identifier flatten
@@ -26,6 +28,7 @@ PP2TutorialExamples >> identifierFlatten [
 { #category : #accessing }
 PP2TutorialExamples >> identifierFlattenParseHowdy [
 	<gtExample>
+	<return: #ByteString>
 	| identifier |
 	identifier := self identifierFlatten.
 	^ identifier parse: 'howdy'
@@ -34,6 +37,7 @@ PP2TutorialExamples >> identifierFlattenParseHowdy [
 { #category : #accessing }
 PP2TutorialExamples >> identifierMatches123 [
 	<gtExample>
+	<return: #False>
 	| identifier |
 	identifier := self identifier.
 	^ identifier matches: '123'
@@ -42,6 +46,7 @@ PP2TutorialExamples >> identifierMatches123 [
 { #category : #accessing }
 PP2TutorialExamples >> identifierMatchesFoo [
 	<gtExample>
+	<return: #True>
 	| identifier |
 	identifier := self identifier.
 	^ identifier matches: 'foo'
@@ -50,6 +55,7 @@ PP2TutorialExamples >> identifierMatchesFoo [
 { #category : #accessing }
 PP2TutorialExamples >> identifierParse123 [
 	<gtExample>
+	<return: #PP2Failure>
 	| identifier |
 	identifier := self identifier.
 	^ identifier parse: '123'
@@ -58,6 +64,7 @@ PP2TutorialExamples >> identifierParse123 [
 { #category : #accessing }
 PP2TutorialExamples >> identifierParseF12 [
 	<gtExample>
+	<return: #Array>
 	| identifier |
 	identifier := self identifier.
 	^ identifier parse: 'f12'
@@ -66,6 +73,7 @@ PP2TutorialExamples >> identifierParseF12 [
 { #category : #accessing }
 PP2TutorialExamples >> identifierParseYeah [
 	<gtExample>
+	<return: #Array>
 	| identifier |
 	identifier := self identifier.
 	^ identifier parse: 'yeah'
@@ -74,6 +82,7 @@ PP2TutorialExamples >> identifierParseYeah [
 { #category : #accessing }
 PP2TutorialExamples >> number [
 	<gtExample>
+	<return: #PP2ActionNode>
 	| number |
 	number := #digit asPParser plus token trim
 			==> [ :token | token value asNumber ].
@@ -83,6 +92,7 @@ PP2TutorialExamples >> number [
 { #category : #accessing }
 PP2TutorialExamples >> numberParse42 [
 	<gtExample>
+	<return: #SmallInteger>
 	| number |
 	number := self number.
 	^ number parse: '42'
@@ -91,6 +101,7 @@ PP2TutorialExamples >> numberParse42 [
 { #category : #accessing }
 PP2TutorialExamples >> start [
 	<gtExample>
+	<return: #PP2EndNode>
 	| start |
 	start := self term end.
 	^ start
@@ -99,6 +110,7 @@ PP2TutorialExamples >> start [
 { #category : #accessing }
 PP2TutorialExamples >> startParseOnePlusTwoThenTimesThree [
 	<gtExample>
+	<return: #SmallInteger>
 	| start result |
 	start := self start.
 	result := start parse: '(1 + 2) * 3'.
@@ -109,9 +121,10 @@ PP2TutorialExamples >> startParseOnePlusTwoThenTimesThree [
 { #category : #accessing }
 PP2TutorialExamples >> startParseOnePlusTwoTimesThree [
 	<gtExample>
+	<return: #SmallInteger>
 	| start result |
 	start := self start.
-	result := start parse: '1 + 2 * 3'. 
+	result := start parse: '1 + 2 * 3'.
 	self assert: result equals: 7.
 	^ result
 ]
@@ -119,6 +132,7 @@ PP2TutorialExamples >> startParseOnePlusTwoTimesThree [
 { #category : #accessing }
 PP2TutorialExamples >> term [
 	<gtExample>
+	<return: #PP2ChoiceNode>
 	| term prod prim number |
 	number := self number.
 	term := PP2UnresolvedNode new.
