@@ -86,7 +86,8 @@ GtPP2CreateParserRefactoringController >> installRenamer [
 		do: [ :ann | 
 			ann eventType = #textUpdated
 				ifTrue: [ renameAction isValid ifTrue: [ self updateClassName: renameAction newName ] ].
-			ann eventType = #cancel ifTrue: [ self cancelRefactoring ] ].
+			ann eventType = #cancel ifTrue: [ self cancelRefactoring ] ]
+		for: self.
 	renameAction install.
 
 	self addClassPackageAttribute
