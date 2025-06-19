@@ -5,6 +5,14 @@ Class {
 }
 
 { #category : #transforming }
+GtPP2RenameRefactoring >> privateTransform [
+	self renameImplementors.
+	super transform.
+	self renameSelfSends.
+	self removeRenamedMethods
+]
+
+{ #category : #transforming }
 GtPP2RenameRefactoring >> removeRenamedMethods [
 	class withAllSubclasses
 		do: [ :each | 

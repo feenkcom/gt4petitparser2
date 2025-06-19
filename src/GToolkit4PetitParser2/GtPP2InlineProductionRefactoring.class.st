@@ -43,6 +43,17 @@ GtPP2InlineProductionRefactoring >> inline: anInterval inMethod: aSelector forCl
 	sourceInterval := sourceInterval first to: sourceInterval last + 5
 ]
 
+{ #category : #transforming }
+GtPP2InlineProductionRefactoring >> privateTransform [
+	super transform.
+	self hasVariableReference
+		ifFalse: [ (class whoDefinesInstanceVariable: variableName)
+				removeInstanceVariable: variableName.
+			(class whoDefinesMethod: variableName asSymbol)
+				removeMethod: variableName asSymbol ].
+	self gtCleanupChanges
+]
+
 { #category : #accessing }
 GtPP2InlineProductionRefactoring >> transform [
 	super transform.
