@@ -25,6 +25,14 @@ GtPP2CreateParserRefactoring >> addMethods [
 	ast statements do: [ :each | self compileProduction: each ]
 ]
 
+{ #category : #transforming }
+GtPP2CreateParserRefactoring >> basicTransform [
+	self createAst.
+	self createParserClass.
+	self addMethods.
+	self createStartMethod
+]
+
 { #category : #accessing }
 GtPP2CreateParserRefactoring >> category [
 	^ category
@@ -101,6 +109,11 @@ GtPP2CreateParserRefactoring >> preconditions [
 		& (RBCondition isGlobal: className in: self model) not
 ]
 
+{ #category : #transforming }
+GtPP2CreateParserRefactoring >> privateTranform [
+	self basicTransform
+]
+
 { #category : #accessing }
 GtPP2CreateParserRefactoring >> source [
 	^ source
@@ -113,8 +126,5 @@ GtPP2CreateParserRefactoring >> source: aString [
 
 { #category : #transforming }
 GtPP2CreateParserRefactoring >> transform [
-	self createAst.
-	self createParserClass.
-	self addMethods.
-	self createStartMethod
+	self basicTransform
 ]
