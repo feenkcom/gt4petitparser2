@@ -110,7 +110,7 @@ GtPP2CreateParserRefactoring >> preconditions [
 ]
 
 { #category : #transforming }
-GtPP2CreateParserRefactoring >> privateTranform [
+GtPP2CreateParserRefactoring >> privateTransform [
 	self basicTransform
 ]
 
