@@ -7,7 +7,7 @@ Class {
 { #category : #transforming }
 GtPP2RenameRefactoring >> privateTransform [
 	self renameImplementors.
-	super transform.
+	super privateTransform.
 	self renameSelfSends.
 	self removeRenamedMethods
 ]
