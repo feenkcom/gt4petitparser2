@@ -45,7 +45,7 @@ GtPP2InlineProductionRefactoring >> inline: anInterval inMethod: aSelector forCl
 
 { #category : #transforming }
 GtPP2InlineProductionRefactoring >> privateTransform [
-	super transform.
+	super privateTransform.
 	self hasVariableReference
 		ifFalse: [ (class whoDefinesInstanceVariable: variableName)
 				removeInstanceVariable: variableName.
