@@ -66,7 +66,7 @@ GtPP2CreateParserRefactoringController >> indexAtEndOfClassName [
 GtPP2CreateParserRefactoringController >> initialize [
 	super initialize.
 	className := #NewParser.
-	package := RPackage defaultPackageName.
+	package := Package defaultPackageName.
 	tag := ''
 ]
 
