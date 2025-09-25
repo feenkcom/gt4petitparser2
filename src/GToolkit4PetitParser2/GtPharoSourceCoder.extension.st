@@ -3,6 +3,7 @@ Extension { #name : #GtPharoSourceCoder }
 { #category : #'*GToolkit4PetitParser2' }
 GtPharoSourceCoder >> extractProduction: anAst to: coderAddOns from: aCoderViewModel [
 	<gtCoderContextMenuAddOns: 210>
+	<gtCoderContextMenuAddOns>
 	(aCoderViewModel behavior includesBehavior: PP2CompositeNode)
 		ifFalse: [ ^ self ].
 	(self extractableNodesFrom: aCoderViewModel)
@@ -11,7 +12,7 @@ GtPharoSourceCoder >> extractProduction: anAst to: coderAddOns from: aCoderViewM
 			(nodes
 				anySatisfy: [ :each | each isMethod or: [ (each nodeOfType: GtPharoMethodPatternNode) notNil ] ])
 				ifTrue: [ ^ self ].
-			coderAddOns
+			(coderAddOns
 				addContextMenuItem: 'Extract production'
 				group: BrMenuItemGroupConfiguration refactoring
 				hover: [ :textualCoderViewModel | 
@@ -22,12 +23,14 @@ GtPharoSourceCoder >> extractProduction: anAst to: coderAddOns from: aCoderViewM
 				leave: self removeHighlightBlock
 				action: [ :aTextualViewModel :element | 
 					(GtPP2ExtractProductionRefactoringController new
-						sourceCoderViewModel: aTextualViewModel) executeIn: element ] ]
+						sourceCoderViewModel: aTextualViewModel) executeIn: element ])
+				ifNotNil: [ :anAction | anAction priority: 210 ] ]
 ]
 
 { #category : #'*GToolkit4PetitParser2' }
 GtPharoSourceCoder >> inlineProduction: anAst to: coderAddOns from: aCoderViewModel [
 	<gtCoderContextMenuAddOns: 211>
+	<gtCoderContextMenuAddOns>
 	(aCoderViewModel behavior includesBehavior: PP2CompositeNode)
 		ifFalse: [ ^ self ].
 	(self nodeFrom: aCoderViewModel)
@@ -37,7 +40,7 @@ GtPharoSourceCoder >> inlineProduction: anAst to: coderAddOns from: aCoderViewMo
 				ifFalse: [ ^ self ].
 			(aCoderViewModel behavior whichClassIncludesSelector: node source asSymbol)
 				ifNil: [ ^ self ].
-			coderAddOns
+			(coderAddOns
 				addContextMenuItem: (self
 						createLabel: 'Inline production'
 						description: node source)
@@ -51,5 +54,6 @@ GtPharoSourceCoder >> inlineProduction: anAst to: coderAddOns from: aCoderViewMo
 				action: [ :aTextualViewModel :element | 
 					(GtPP2InlineProductionRefactoringController new
 						sourceCoderViewModel: aTextualViewModel;
-						variableNode: node) executeIn: element ] ]
+						variableNode: node) executeIn: element ])
+				ifNotNil: [ :anAction | anAction priority: 211 ] ]
 ]
