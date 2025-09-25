@@ -3,6 +3,7 @@ Extension { #name : #GtPharoSourceCoder }
 { #category : #'*GToolkit4PetitParser2' }
 GtPharoSourceCoder >> extractProduction: anAst to: coderAddOns from: aCoderViewModel [
 	<gtCoderContextMenuAddOns: 210>
+	<gtCoderContextMenuAddOns>
 	(aCoderViewModel behavior includesBehavior: PP2CompositeNode)
 		ifFalse: [ ^ self ].
 	(self extractableNodesFrom: aCoderViewModel)
@@ -29,6 +30,7 @@ GtPharoSourceCoder >> extractProduction: anAst to: coderAddOns from: aCoderViewM
 { #category : #'*GToolkit4PetitParser2' }
 GtPharoSourceCoder >> inlineProduction: anAst to: coderAddOns from: aCoderViewModel [
 	<gtCoderContextMenuAddOns: 211>
+	<gtCoderContextMenuAddOns>
 	(aCoderViewModel behavior includesBehavior: PP2CompositeNode)
 		ifFalse: [ ^ self ].
 	(self nodeFrom: aCoderViewModel)

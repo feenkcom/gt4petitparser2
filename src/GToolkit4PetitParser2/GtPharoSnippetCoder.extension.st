@@ -3,6 +3,7 @@ Extension { #name : #GtPharoSnippetCoder }
 { #category : #'*GToolkit4PetitParser2' }
 GtPharoSnippetCoder >> addCreatePetitParserMenuItem: anAst to: coderAddOns from: aCoderViewModel [
 	<gtCoderContextMenuAddOns: 200>
+	<gtCoderContextMenuAddOns>
 	| nodeVariables |
 	nodeVariables := Dictionary new.
 	(anAst statements allSatisfy: [ :each | each isAssignment ])
@@ -30,5 +31,5 @@ GtPharoSnippetCoder >> addCreatePetitParserMenuItem: anAst to: coderAddOns from:
 		action: [ :aTextualViewModel :element | 
 			(GtPP2CreateParserRefactoringController new
 				sourceCoderViewModel: aTextualViewModel) executeIn: element ])
-					ifNotNil: [ :anAction | anAction priority: 200 ]
+		ifNotNil: [ :anAction | anAction priority: 200 ]
 ]
