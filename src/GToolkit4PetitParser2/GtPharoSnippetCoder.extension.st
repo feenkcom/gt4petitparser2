@@ -2,7 +2,6 @@ Extension { #name : #GtPharoSnippetCoder }
 
 { #category : #'*GToolkit4PetitParser2' }
 GtPharoSnippetCoder >> addCreatePetitParserMenuItem: anAst to: coderAddOns from: aCoderViewModel [
-	<gtCoderContextMenuAddOns: 200>
 	<gtCoderContextMenuAddOns>
 	| nodeVariables |
 	nodeVariables := Dictionary new.
