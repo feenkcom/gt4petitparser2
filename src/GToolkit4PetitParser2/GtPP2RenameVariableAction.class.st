@@ -16,7 +16,7 @@ GtPP2RenameVariableAction >> processReturnFor: renameEditor in: anEditorElement 
 	lastWasEditor := false.
 	anEditorElement
 		allChildrenBreadthFirstDo: [ :each | 
-			(lastWasEditor and: [ (each isKindOf: GtRefactoringsPreviewButton) or: [ each isKindOf: GtRefactoringsInDropdownPreviewElement ] ])
+			(lastWasEditor and: [ each isKindOf: GtRefactoringsInDropdownPreviewElement ])
 				ifTrue: [ ^ each openPreview ].
 			(each isKindOf: GtRenameEditor)
 				ifTrue: [ first ifNil: [ first := each ].
