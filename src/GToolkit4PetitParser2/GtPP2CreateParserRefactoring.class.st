@@ -1,6 +1,6 @@
 Class {
 	#name : #GtPP2CreateParserRefactoring,
-	#superclass : #RBRefactoring,
+	#superclass : #ReRefactoring,
 	#instVars : [
 		'source',
 		'className',
