@@ -5,7 +5,7 @@ Class {
 		'action',
 		'previousLinks'
 	],
-	#category : 'GToolkit4PetitParser2'
+	#category : #GToolkit4PetitParser2
 }
 
 { #category : #accessing }
