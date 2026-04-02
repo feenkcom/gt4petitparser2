@@ -27,6 +27,7 @@ GtPP2CreateParserRefactoringController >> addClassPackageAttribute [
 			addTextAttribute: expander
 			from: self indexAtEndOfClassName
 			to: self indexAtEndOfClassName
+			documentId: documentId
 ]
 
 { #category : #accessing }

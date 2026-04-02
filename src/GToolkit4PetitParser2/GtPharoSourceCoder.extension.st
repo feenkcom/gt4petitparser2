@@ -18,7 +18,8 @@ GtPharoSourceCoder >> extractProduction: anAst to: coderAddOns from: aCoderViewM
 					textualCoderViewModel
 						addTextAttribute: self class nodeHighlight
 						from: nodes first startPosition
-						to: nodes last stopPosition ]
+						to: nodes last stopPosition
+						documentId: aCoderViewModel documentId ]
 				leave: self removeHighlightBlock
 				action: [ :aTextualViewModel :element | 
 					(GtPP2ExtractProductionRefactoringController new
@@ -47,7 +48,8 @@ GtPharoSourceCoder >> inlineProduction: anAst to: coderAddOns from: aCoderViewMo
 					textualCoderViewModel
 						addTextAttribute: self class nodeHighlight
 						from: node startPosition
-						to: node stopPosition ]
+						to: node stopPosition
+						documentId: aCoderViewModel documentId ]
 				leave: self removeHighlightBlock
 				action: [ :aTextualViewModel :element | 
 					(GtPP2InlineProductionRefactoringController new
