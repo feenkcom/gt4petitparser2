@@ -16,13 +16,8 @@ GtPharoSourceCoder >> extractProduction: anAst to: coderAddOns from: aCoderViewM
 			(coderAddOns
 				addContextMenuItem: 'Extract production'
 				group: BrMenuItemGroupConfiguration refactoring
-				hover: [ :textualCoderViewModel | 
-					textualCoderViewModel
-						addTextAttribute: self class nodeHighlight
-						from: nodes first startPosition
-						to: nodes last stopPosition
-						documentId: aCoderViewModel documentId ]
-				leave: self removeHighlightBlock
+				hover: (self highlightNodesFromFirstToLastBlock: nodes documentId: aDocumentId)
+				leave: self removeHighlightsBlock
 				action: [ :aTextualViewModel :element | 
 					(GtPP2ExtractProductionRefactoringController new
 						sourceCoderViewModel: aTextualViewModel) executeIn: element ])
@@ -48,13 +43,8 @@ GtPharoSourceCoder >> inlineProduction: anAst to: coderAddOns from: aCoderViewMo
 						createLabel: 'Inline production'
 						description: node source)
 				group: BrMenuItemGroupConfiguration refactoring
-				hover: [ :textualCoderViewModel | 
-					textualCoderViewModel
-						addTextAttribute: self class nodeHighlight
-						from: node startPosition
-						to: node stopPosition
-						documentId: aCoderViewModel documentId ]
-				leave: self removeHighlightBlock
+				hover: (self highlightNodeBlock: node documentId: aDocumentId)
+				leave: self removeHighlightsBlock
 				action: [ :aTextualViewModel :element | 
 					(GtPP2InlineProductionRefactoringController new
 						sourceCoderViewModel: aTextualViewModel;
