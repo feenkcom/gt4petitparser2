@@ -3,7 +3,8 @@ Extension { #name : #GtPharoSnippetCoder }
 { #category : #'*GToolkit4PetitParser2' }
 GtPharoSnippetCoder >> addCreatePetitParserMenuItem: anAst to: coderAddOns from: aCoderViewModel [
 	<gtCoderContextMenuAddOns>
-	| nodeVariables |
+	| nodeVariables aDocumentId |
+	aDocumentId := aCoderViewModel documentId.
 	nodeVariables := Dictionary new.
 	(anAst statements allSatisfy: [ :each | each isAssignment ])
 		ifFalse: [ ^ self ].
