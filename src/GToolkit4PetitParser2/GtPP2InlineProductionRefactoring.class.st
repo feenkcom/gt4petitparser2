@@ -49,7 +49,7 @@ GtPP2InlineProductionRefactoring >> privateTransform [
 	self hasVariableReference
 		ifFalse: [ (class whoDefinesInstanceVariable: variableName)
 				removeInstanceVariable: variableName.
-			(class whoDefinesMethod: variableName asSymbol)
+			(class whichClassIncludesSelector: variableName asSymbol)
 				removeMethod: variableName asSymbol ].
 	self gtCleanupChanges
 ]
@@ -60,7 +60,7 @@ GtPP2InlineProductionRefactoring >> transform [
 	self hasVariableReference
 		ifFalse: [ (class whoDefinesInstanceVariable: variableName)
 				removeInstanceVariable: variableName.
-			(class whoDefinesMethod: variableName asSymbol)
+			(class whichClassIncludesSelector: variableName asSymbol)
 				removeMethod: variableName asSymbol ].
 	self gtCleanupChanges
 ]
