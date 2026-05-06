@@ -25,6 +25,18 @@ GtPP2CreateParserRefactoring >> addMethods [
 	ast statements do: [ :each | self compileProduction: each ]
 ]
 
+{ #category : #preconditions }
+GtPP2CreateParserRefactoring >> applicabilityPreconditions [
+	| conds |
+	conds := OrderedCollection new.
+	conds
+		add: (RBCondition
+				withBlock: [ (RBScanner isVariable: className) and: [ className first isLowercase not ] ]
+				errorString: className , ' is not a valid class name').
+	conds add: (RBCondition isGlobal: className in: self model) not.
+	^ self applicabilityPreconditionsFor: conds
+]
+
 { #category : #transforming }
 GtPP2CreateParserRefactoring >> basicTransform [
 	self createAst.
@@ -99,14 +111,6 @@ GtPP2CreateParserRefactoring >> gtDescription [
 { #category : #transforming }
 GtPP2CreateParserRefactoring >> ppClass [
 	^ self model classNamed: className
-]
-
-{ #category : #preconditions }
-GtPP2CreateParserRefactoring >> preconditions [
-	^ (RBCondition
-		withBlock: [ (RBScanner isVariable: className) and: [ className first isLowercase not ] ]
-		errorString: className , ' is not a valid class name')
-		& (RBCondition isGlobal: className in: self model) not
 ]
 
 { #category : #transforming }
