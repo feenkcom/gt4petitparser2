@@ -11,20 +11,18 @@ GtCoderExpandablePetitParserProductionStyler >> visitNamedVariable: aIVNode [
 	selector := aIVNode name value asSymbol.
 	(self coderViewModel behavior canPerform: selector) ifFalse: [ ^ self ].
 
-	self
-		attribute: (BrGlamorousTriangleExpanderTextAttributeV2 new
-				stencil: [ | coderElement method coder |
-							method := self coderViewModel behavior lookupSelector: selector.
-							coder := GtPharoMethodCoder
-									forExample: (method methodClass gtExamplesFactory createExample: method).
-							coderElement := coder asElement.
-							coderElement border: (BlBorder paint: Color veryLightGray width: 1).
-							coderElement
-								margin: (BlInsets
-										top: 0
-										right: 10
-										bottom: 10
-										left: 10) ])
-		from: aIVNode stopPosition
-		to: aIVNode stopPosition
+	(self from: aIVNode stopPosition to: aIVNode stopPosition)
+		expanded: false
+		adornment: [ | coderElement method coder |
+			method := self coderViewModel behavior lookupSelector: selector.
+			coder := GtPharoMethodCoder
+					forExample: (method methodClass gtExamplesFactory createExample: method).
+			coderElement := coder asElement.
+			coderElement border: (BlBorder paint: Color veryLightGray width: 1).
+			coderElement
+				margin: (BlInsets
+						top: 0
+						right: 10
+						bottom: 10
+						left: 10) ]
 ]
