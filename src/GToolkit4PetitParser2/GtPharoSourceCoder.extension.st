@@ -20,7 +20,8 @@ GtPharoSourceCoder >> extractProduction: anAst to: coderAddOns from: aCoderViewM
 				leave: self removeHighlightsBlock
 				action: [ :aTextualViewModel :element | 
 					(GtPP2ExtractProductionRefactoringController new
-						sourceCoderViewModel: aTextualViewModel) executeIn: element ])
+						sourceCoderViewModel: aTextualViewModel;
+						documentId: aDocumentId) executeIn: element ])
 				ifNotNil: [ :anAction | anAction priority: 210 ] ]
 ]
 
@@ -48,6 +49,7 @@ GtPharoSourceCoder >> inlineProduction: anAst to: coderAddOns from: aCoderViewMo
 				action: [ :aTextualViewModel :element | 
 					(GtPP2InlineProductionRefactoringController new
 						sourceCoderViewModel: aTextualViewModel;
-						variableNode: node) executeIn: element ])
+						variableNode: node;
+						documentId: aDocumentId) executeIn: element ])
 				ifNotNil: [ :anAction | anAction priority: 211 ] ]
 ]
