@@ -80,6 +80,7 @@ GtPP2CreateParserRefactoringController >> installRenamer [
 	renameAction := GtPP2RenameVariableAction
 			locations: {self indexAtEndOfClassName - className size + 1 to: self indexAtEndOfClassName}
 			textualCoderViewModel: sourceCoderViewModel.
+	renameAction documentId: documentId.
 	renameAction selectAll: true.
 	renameAction forVariableOrUnaryMessage.
 	renameAction
