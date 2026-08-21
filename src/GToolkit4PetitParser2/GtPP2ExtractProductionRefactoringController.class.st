@@ -40,6 +40,7 @@ GtPP2ExtractProductionRefactoringController >> installRenamer [
 	renameAction := GtPP2RenameVariableAction
 			locations: {variable sourceInterval}
 			textualCoderViewModel: sourceCoderViewModel.
+	renameAction documentId: documentId.
 	renameAction selectAll: true.
 	renameAction forVariableOrUnaryMessage.
 	renameAction

@@ -30,6 +30,7 @@ GtPharoSnippetCoder >> addCreatePetitParserMenuItem: anAst to: coderAddOns from:
 		addContextMenuItem: 'Extract PetitParser class'
 		action: [ :aTextualViewModel :element | 
 			(GtPP2CreateParserRefactoringController new
-				sourceCoderViewModel: aTextualViewModel) executeIn: element ])
+				sourceCoderViewModel: aTextualViewModel;
+				documentId: aDocumentId) executeIn: element ])
 		ifNotNil: [ :anAction | anAction priority: 200 ]
 ]
