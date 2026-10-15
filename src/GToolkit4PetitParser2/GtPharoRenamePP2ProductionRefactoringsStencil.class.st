@@ -1,3 +1,9 @@
+"
+I compute {{gtClass:GtPP2RenameRefactoring}} that renames a PetitParser2 production. See {{gtClass:GtPharoRenamePP2ProductionCoderController}}.
+
+# Example
+{{gtExample:GtPharoRenamePP2ProductionCoderControllerExamples>>#installedController_refactoring | codeExpanded=false | previewExpanded | previewHeight=200}}
+"
 Class {
 	#name : #GtPharoRenamePP2ProductionRefactoringsStencil,
 	#superclass : #GtPharoRenameVariableRefactoringsStencil,
@@ -6,7 +12,7 @@ Class {
 
 { #category : #creation }
 GtPharoRenamePP2ProductionRefactoringsStencil >> computeRefactoring [
-	"Same as `${method:GtPP2RenameController>>#rename:to:}$`."
+	"Same as {{gtMethod:GtPP2RenameController>>#rename:to:}}."
 
 	| aModel aClass |
 	aModel := self createModel.

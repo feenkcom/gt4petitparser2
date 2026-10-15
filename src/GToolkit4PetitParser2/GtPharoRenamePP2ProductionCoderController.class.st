@@ -1,3 +1,9 @@
+"
+I rename a PetitParser2 production. A production is referenced by an instance variable of a {{gtClass:PP2CompositeNode}} subclass or by a unary message sent to self or super. I replace {{gtClass:GtPP2RenameController}}. See {{gtMethod:GtPharoRenamePP2ProductionCoderController class>>#renameIn:node:}}.
+
+# Example
+{{gtExample:GtPharoRenamePP2ProductionRustEditorExamples>>#rustScripterEditorWithFieldMethod_enterShowsPreview | codeExpanded=false | previewExpanded | previewHeight=400}}
+"
 Class {
 	#name : #GtPharoRenamePP2ProductionCoderController,
 	#superclass : #GtPharoRenameVariableCoderController,
@@ -44,7 +50,7 @@ GtPharoRenamePP2ProductionCoderController class >> productionNameOf: aNode [
 
 { #category : #'instance creation' }
 GtPharoRenamePP2ProductionCoderController class >> renameIn: aSourceCoderViewModel node: aNode [
-	"Return a not installed controller that renames the PetitParser2 production referenced by the given node, or nil if the node does not reference a production of a ${class:PP2CompositeNode}$ subclass."
+	"Return a not installed controller that renames the PetitParser2 production referenced by the given node, or nil if the node does not reference a production of a {{gtClass:PP2CompositeNode}} subclass."
 
 	<gtPharoRenameController>
 	(self isApplicableIn: aSourceCoderViewModel node: aNode) ifFalse: [ ^ nil ].

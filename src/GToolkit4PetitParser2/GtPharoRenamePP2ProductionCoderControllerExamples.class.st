@@ -1,3 +1,6 @@
+"
+I contain examples of {{gtClass:GtPharoRenamePP2ProductionCoderController}} on {{gtMethod:BibtexPParser>>#field}}.
+"
 Class {
 	#name : #GtPharoRenamePP2ProductionCoderControllerExamples,
 	#superclass : #Object,

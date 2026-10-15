@@ -14,7 +14,7 @@ Class {
 
 { #category : #accessing }
 GtPharoRenameEditorElementStub >> editorElement [
-	"The coder element that is passed to `GtPharoSourceCoder>>#renameNewNode:in:documentId:for:` understands `#editorElement`."
+	"The coder element that is passed to {{gtMethod:GtPharoSourceCoder>>#renameNewNode:in:documentId:for:}} understands `#editorElement`."
 
 	^ editorElement
 ]

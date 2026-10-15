@@ -1,3 +1,6 @@
+"
+I contain examples that use {{gtClass:BlScripter}} to simulate user interactions with {{gtClass:GtPharoRenamePP2ProductionCoderController}} in a coder with a Rust text editor, see {{gtMethod:BibtexPParser>>#field}}.
+"
 Class {
 	#name : #GtPharoRenamePP2ProductionRustEditorExamples,
 	#superclass : #Object,
@@ -29,7 +32,7 @@ GtPharoRenamePP2ProductionRustEditorExamples >> assert: aScripter refactoringsPr
 
 { #category : #utilities }
 GtPharoRenamePP2ProductionRustEditorExamples >> createRustEditorWithMethod: aMethod variableNamed: aVariableName [
-	"Create a coder element with a Rust text editor. When the editor is styled, the production rename controller is created by `GtPharoRenamePP2ProductionCoderController class>>#renameIn:node:` for the first variable with the given name and installed."
+	"Create a coder element with a Rust text editor. When the editor is styled, the production rename controller is created by {{gtMethod:GtPharoRenamePP2ProductionCoderController class>>#renameIn:node:}} for the first variable with the given name and installed."
 
 	| aCoderElement aTextEditorElement aDocumentId aController aCoder aCoderViewModel aRecorder |
 	aDocumentId := nil.

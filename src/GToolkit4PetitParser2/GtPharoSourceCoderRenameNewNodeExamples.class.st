@@ -1,8 +1,190 @@
+"
+I contain examples of the rename entry points of {{gtClass:GtPharoSourceCoder}}: {{gtMethod:GtPharoSourceCoder>>#renameNewNode:in:documentId:for:}}, {{gtMethod:GtPharoSourceCoder>>#renamePharoControllerIn:for:}}, {{gtMethod:GtPharoSourceCoder>>#addRenameMethodAst:to:from:}} and {{gtMethod:GtPharoSourceCoder>>#renameAt:in:documentId:for:}}.
+"
 Class {
 	#name : #GtPharoSourceCoderRenameNewNodeExamples,
 	#superclass : #Object,
 	#category : #'GToolkit4PetitParser2-Refactoring - Method New'
 }
+
+{ #category : #utilities }
+GtPharoSourceCoderRenameNewNodeExamples >> firstMessageNodeIn: aCoder [
+	aCoder astSync allNodesDo: [ :each | each isMessage ifTrue: [ ^ each ] ].
+	^ self error: 'The method must contain a message'
+]
+
+{ #category : #utilities }
+GtPharoSourceCoderRenameNewNodeExamples >> instAPlusOneCoder [
+	^ GtPharoMethodCoder forMethod: GtPharoRenameVariableCoderControllerExamples new instAPlusOneMethod
+]
+
+{ #category : #utilities }
+GtPharoSourceCoderRenameNewNodeExamples >> newEditorElementStub [
+	| anEditor |
+	anEditor := GtTextEditorElement new.
+	anEditor text: GtPharoRenameVariableCoderControllerExamples new instAPlusOneMethod sourceCode asRopedText.
+	^ GtPharoRenameEditorElementStub new editorElement: anEditor
+]
+
+{ #category : #examples }
+GtPharoSourceCoderRenameNewNodeExamples >> renameAtWithNewImplementation [
+	<gtExample>
+	<return: #GtPharoSourceCoderRenameNewNodeExamples>
+	| aCoder aViewModel aNode aStub |
+	aCoder := self instAPlusOneCoder.
+	aViewModel := aCoder asCoderViewModel.
+	aNode := self firstMessageNodeIn: aCoder.
+	aStub := self newEditorElementStub.
+
+	self
+		withNewRenameImplementation: true
+		do: [ aCoder
+				renameAt: aNode selectorParts first sourceInterval first
+				in: aViewModel
+				documentId: nil
+				for: aStub ].
+
+	self assert: (aStub editorElement userData includesKey: #selectorModel).
+	self
+		assert: (aStub editorElement userData at: #selectorController) class
+		equals: GtPharoRenameSelectorCoderController.
+	^ self
+]
+
+{ #category : #examples }
+GtPharoSourceCoderRenameNewNodeExamples >> renameAtWithOldImplementation [
+	<gtExample>
+	<return: #GtPharoSourceCoderRenameNewNodeExamples>
+	| aCoder aViewModel aNode aStub |
+	aCoder := self instAPlusOneCoder.
+	aViewModel := aCoder asCoderViewModel.
+	aNode := self firstMessageNodeIn: aCoder.
+	aStub := self newEditorElementStub.
+
+	self
+		withNewRenameImplementation: false
+		do: [ aCoder
+				renameAt: aNode selectorParts first sourceInterval first
+				in: aViewModel
+				documentId: nil
+				for: aStub ].
+
+	self assert: (aStub editorElement userData includesKey: #selectorModel) not.
+	^ self
+]
+
+{ #category : #examples }
+GtPharoSourceCoderRenameNewNodeExamples >> renameAtWithoutNode [
+	"No node is found, nothing is installed."
+
+	<gtExample>
+	<return: #GtPharoSourceCoderRenameNewNodeExamples>
+	| aCoder aViewModel aStub |
+	aCoder := self instAPlusOneCoder.
+	aViewModel := aCoder asCoderViewModel.
+	aStub := self newEditorElementStub.
+
+	#(false true)
+		do: [ :eachSetting | 
+			self
+				withNewRenameImplementation: eachSetting
+				do: [ aCoder
+						renameAt: aCoder currentSourceString size + 100
+						in: aViewModel
+						documentId: nil
+						for: aStub ] ].
+
+	self assert: aStub editorElement userData isEmpty.
+	^ self
+]
+
+{ #category : #examples }
+GtPharoSourceCoderRenameNewNodeExamples >> renameMenuItemIsNotAddedForVariable [
+	<gtExample>
+	<return: #GtPharoSourceCoderRenameNewNodeExamples>
+	| aCoder aViewModel aVariableNode |
+	aCoder := self instAPlusOneCoder.
+	aViewModel := aCoder asCoderViewModel.
+	aVariableNode := GtPharoRenameVariableCoderControllerExamples new instAVariableNode.
+
+	#(false true)
+		do: [ :eachSetting | 
+			self
+				withNewRenameImplementation: eachSetting
+				do: [ self
+						assert: (self
+								renameMessageActionsFor: aCoder
+								cursorAt: aVariableNode startPosition
+								in: aViewModel) isEmpty ] ].
+	^ self
+]
+
+{ #category : #examples }
+GtPharoSourceCoderRenameNewNodeExamples >> renameMenuItemWithNewImplementation [
+	<gtExample>
+	<return: #GtPharoSourceCoderRenameNewNodeExamples>
+	| aCoder aViewModel aNode someActions aStub |
+	aCoder := self instAPlusOneCoder.
+	aViewModel := aCoder asCoderViewModel.
+	aNode := self firstMessageNodeIn: aCoder.
+	aStub := self newEditorElementStub.
+
+	self
+		withNewRenameImplementation: true
+		do: [ someActions := self
+					renameMessageActionsFor: aCoder
+					cursorAt: aNode selectorParts first sourceInterval first
+					in: aViewModel.
+			"a single item, the old and the new implementation are not offered together"
+			self assert: someActions size equals: 1.
+			self assert: (someActions first title asString beginsWith: 'Rename message (new)').
+
+			someActions first action value: aViewModel value: aStub ].
+
+	self assert: (aStub editorElement userData includesKey: #selectorModel).
+	self
+		assert: (aStub editorElement userData at: #selectorController) class
+		equals: GtPharoRenameSelectorCoderController.
+	^ self
+]
+
+{ #category : #examples }
+GtPharoSourceCoderRenameNewNodeExamples >> renameMenuItemWithOldImplementation [
+	<gtExample>
+	<return: #GtPharoSourceCoderRenameNewNodeExamples>
+	| aCoder aViewModel aNode someActions aStub |
+	aCoder := self instAPlusOneCoder.
+	aViewModel := aCoder asCoderViewModel.
+	aNode := self firstMessageNodeIn: aCoder.
+	aStub := self newEditorElementStub.
+
+	self
+		withNewRenameImplementation: false
+		do: [ someActions := self
+					renameMessageActionsFor: aCoder
+					cursorAt: aNode selectorParts first sourceInterval first
+					in: aViewModel.
+			self assert: someActions size equals: 1.
+			self assert: (someActions first title asString beginsWith: 'Rename message').
+			self assert: (someActions first title asString includesSubstring: '(new)') not.
+
+			someActions first action value: aViewModel value: aStub ].
+
+	self assert: (aStub editorElement userData includesKey: #selectorModel) not.
+	^ self
+]
+
+{ #category : #utilities }
+GtPharoSourceCoderRenameNewNodeExamples >> renameMessageActionsFor: aCoder cursorAt: aTextPosition in: aViewModel [
+	"Return the context menu actions that are added for the node at the cursor position."
+
+	| someAddOns |
+	someAddOns := aCoder addOns class new.
+	aViewModel moveCursorTo: aTextPosition.
+	aCoder addRenameMethodAst: aCoder astSync to: someAddOns from: aViewModel.
+	^ someAddOns contextMenuActions
+		select: [ :each | each id = #'coder--refactoring-rename-message' ]
+]
 
 { #category : #examples }
 GtPharoSourceCoderRenameNewNodeExamples >> renameNewNodeInstallsPP2Controller [
@@ -100,4 +282,16 @@ GtPharoSourceCoderRenameNewNodeExamples >> renamePharoControllerForFieldNameVari
 	self assert: aController class equals: GtPharoRenamePP2ProductionCoderController.
 	self assert: aController variableModel isNil.
 	^ aController
+]
+
+{ #category : #utilities }
+GtPharoSourceCoderRenameNewNodeExamples >> withNewRenameImplementation: aBoolean do: aBlock [
+	"Evaluate the block with the given value of the setting and restore the previous value afterwards."
+
+	| aPreviousValue |
+	aPreviousValue := GtPharoCoderSettings displayNewRenameImplementationContextMenuItem.
+	^ [ GtPharoCoderSettings displayNewRenameImplementationContextMenuItem: aBoolean.
+		aBlock value ]
+		ensure: [ GtPharoCoderSettings
+				displayNewRenameImplementationContextMenuItem: aPreviousValue ]
 ]
