@@ -348,6 +348,52 @@ GtPharoSourceCoderRenameNewNodeExamples >> renameAtWithoutNode [
 ]
 
 { #category : #examples }
+GtPharoSourceCoderRenameNewNodeExamples >> renameBaselineAt: aNewImplementationBoolean [
+	"Start renaming of the baseline name of the dummy baseline, return the editor and the result of the rename."
+
+	| anExamples aCoder aViewModel anEditor aNode aResult |
+	anExamples := GtPharoRenameLiteralCoderControllerExamples new.
+	aCoder := GtPharoMethodCoder forMethod: anExamples baselineMethod.
+	aViewModel := aCoder asCoderViewModel.
+	anEditor := anExamples editorWithBaselineMethod.
+	aNode := anExamples baselineNode.
+
+	aResult := self
+			withNewRenameImplementation: aNewImplementationBoolean
+			do: [ aCoder
+					renameBaselineAt: aNode startPosition
+					in: aViewModel
+					for: anEditor ].
+	self assert: aResult.
+	^ anEditor
+]
+
+{ #category : #examples }
+GtPharoSourceCoderRenameNewNodeExamples >> renameBaselineAtDoesNotInstallBaselineControllerWithOldImplementation [
+	<gtExample>
+	<return: #GtTextEditorElement>
+	| anEditor |
+	anEditor := self renameBaselineAt: false.
+	self assert: (anEditor userData includesKey: #variableController) not.
+	^ anEditor
+]
+
+{ #category : #examples }
+GtPharoSourceCoderRenameNewNodeExamples >> renameBaselineAtInstallsBaselineController [
+	<gtExample>
+	<return: #GtTextEditorElement>
+	| anEditor |
+	anEditor := self renameBaselineAt: true.
+	self
+		assert: (anEditor userData at: #variableController) class
+		equals: GtPharoRenameBaselineCoderController.
+	self
+		assert: (anEditor userData at: #variableModel) originalName
+		equals: 'GtPharoDummyBaselineTarget'.
+	^ anEditor
+]
+
+{ #category : #examples }
 GtPharoSourceCoderRenameNewNodeExamples >> renameMenuItemIsNotAddedForVariable [
 	<gtExample>
 	<return: #GtPharoSourceCoderRenameNewNodeExamples>
@@ -491,6 +537,50 @@ GtPharoSourceCoderRenameNewNodeExamples >> renameNewNodeKeepsSelectorController 
 
 	self assert: (anEditor userData includesKey: #selectorModel).
 	self assert: (anEditor userData includesKey: #variableModel) not.
+	^ anEditor
+]
+
+{ #category : #examples }
+GtPharoSourceCoderRenameNewNodeExamples >> renamePackageAt: aNewImplementationBoolean [
+	| anExamples aCoder aViewModel anEditor aNode aResult |
+	anExamples := GtPharoRenameLiteralCoderControllerExamples new.
+	aCoder := GtPharoMethodCoder forMethod: anExamples baselineMethod.
+	aViewModel := aCoder asCoderViewModel.
+	anEditor := anExamples editorWithBaselineMethod.
+	aNode := anExamples packageNode.
+
+	aResult := self
+			withNewRenameImplementation: aNewImplementationBoolean
+			do: [ aCoder
+					renamePackageAt: aNode startPosition
+					in: aViewModel
+					from: anEditor ].
+	self assert: aResult.
+	^ anEditor
+]
+
+{ #category : #examples }
+GtPharoSourceCoderRenameNewNodeExamples >> renamePackageAtDoesNotInstallPackageControllerWithOldImplementation [
+	<gtExample>
+	<return: #GtTextEditorElement>
+	| anEditor |
+	anEditor := self renamePackageAt: false.
+	self assert: (anEditor userData includesKey: #variableController) not.
+	^ anEditor
+]
+
+{ #category : #examples }
+GtPharoSourceCoderRenameNewNodeExamples >> renamePackageAtInstallsPackageController [
+	<gtExample>
+	<return: #GtTextEditorElement>
+	| anEditor |
+	anEditor := self renamePackageAt: true.
+	self
+		assert: (anEditor userData at: #variableController) class
+		equals: GtPharoRenamePackageCoderController.
+	self
+		assert: (anEditor userData at: #variableModel) originalName
+		equals: 'GToolkit-Pharo-Coder-Examples'.
 	^ anEditor
 ]
 
