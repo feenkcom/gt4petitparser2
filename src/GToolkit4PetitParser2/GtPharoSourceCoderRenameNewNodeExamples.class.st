@@ -29,6 +29,28 @@ GtPharoSourceCoderRenameNewNodeExamples >> newEditorElement [
 ]
 
 { #category : #examples }
+GtPharoSourceCoderRenameNewNodeExamples >> renameAtDoesNotInstallInstanceVariableControllerWithOldImplementation [
+	<gtExample>
+	<return: #GtTextEditorElement>
+	| aCoder aViewModel anEditor aNode |
+	aCoder := self instAPlusOneCoder.
+	aViewModel := aCoder asCoderViewModel.
+	anEditor := self newEditorElement.
+	aNode := GtPharoRenameVariableCoderControllerExamples new instAVariableNode.
+
+	self
+		withNewRenameImplementation: false
+		do: [ aCoder
+				renameAt: aNode startPosition + 1
+				in: aViewModel
+				documentId: nil
+				for: anEditor ].
+
+	self assert: (anEditor userData includesKey: #variableController) not.
+	^ anEditor
+]
+
+{ #category : #examples }
 GtPharoSourceCoderRenameNewNodeExamples >> renameAtDoesNotInstallPP2ControllerWithOldImplementation [
 	<gtExample>
 	<return: #GtTextEditorElement>
@@ -48,6 +70,34 @@ GtPharoSourceCoderRenameNewNodeExamples >> renameAtDoesNotInstallPP2ControllerWi
 				for: anEditor ].
 
 	self assert: (anEditor userData includesKey: #variableController) not.
+	^ anEditor
+]
+
+{ #category : #examples }
+GtPharoSourceCoderRenameNewNodeExamples >> renameAtInstallsInstanceVariableController [
+	"An instance variable without a controller with the pragma is renamed by the default controller."
+
+	<gtExample>
+	<return: #GtTextEditorElement>
+	| aCoder aViewModel anEditor aNode aController |
+	aCoder := self instAPlusOneCoder.
+	aViewModel := aCoder asCoderViewModel.
+	anEditor := self newEditorElement.
+	aNode := GtPharoRenameVariableCoderControllerExamples new instAVariableNode.
+
+	self
+		withNewRenameImplementation: true
+		do: [ aCoder
+				renameAt: aNode startPosition + 1
+				in: aViewModel
+				documentId: nil
+				for: anEditor ].
+
+	aController := anEditor userData at: #variableController.
+	self assert: aController class equals: GtPharoRenameInstanceVariableCoderController.
+	self assert: aController editorElement equals: anEditor.
+	self assert: (anEditor userData at: #variableModel) originalName equals: 'instA'.
+	self assert: (anEditor userData includesKey: #selectorController) not.
 	^ anEditor
 ]
 
@@ -76,32 +126,6 @@ GtPharoSourceCoderRenameNewNodeExamples >> renameAtInstallsPP2ControllerForVaria
 	self assert: aController class equals: GtPharoRenamePP2ProductionCoderController.
 	self assert: aController editorElement equals: anEditor.
 	self assert: (anEditor userData at: #variableModel) originalName equals: 'fieldName'.
-	^ anEditor
-]
-
-{ #category : #examples }
-GtPharoSourceCoderRenameNewNodeExamples >> renameAtKeepsOldVariableRenameForOtherVariables [
-	"A variable without an applicable controller is renamed as before."
-
-	<gtExample>
-	<return: #GtTextEditorElement>
-	| aCoder aViewModel anEditor aNode |
-	aCoder := self instAPlusOneCoder.
-	aViewModel := aCoder asCoderViewModel.
-	anEditor := GtTextEditorElement new.
-	anEditor text: aCoder currentSourceString asRopedText.
-	aNode := GtPharoRenameVariableCoderControllerExamples new instAVariableNode.
-
-	self
-		withNewRenameImplementation: true
-		do: [ aCoder
-				renameAt: aNode startPosition + 1
-				in: aViewModel
-				documentId: nil
-				for: anEditor ].
-
-	self assert: (anEditor userData includesKey: #variableController) not.
-	self assert: (anEditor userData includesKey: #selectorController) not.
 	^ anEditor
 ]
 
