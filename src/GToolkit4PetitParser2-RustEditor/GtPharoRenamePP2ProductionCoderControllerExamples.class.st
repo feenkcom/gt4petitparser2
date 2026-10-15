@@ -4,7 +4,7 @@ I contain examples of {{gtClass:GtPharoRenamePP2ProductionCoderController}} on {
 Class {
 	#name : #GtPharoRenamePP2ProductionCoderControllerExamples,
 	#superclass : #Object,
-	#category : #'GToolkit4PetitParser2-Refactoring - Method New'
+	#category : #'GToolkit4PetitParser2-RustEditor-Refactoring - Method New'
 }
 
 { #category : #examples }

@@ -4,7 +4,7 @@ I contain examples of the rename entry points of {{gtClass:GtPharoSourceCoder}}:
 Class {
 	#name : #GtPharoSourceCoderRenameNewNodeExamples,
 	#superclass : #Object,
-	#category : #'GToolkit4PetitParser2-Refactoring - Method New'
+	#category : #'GToolkit4PetitParser2-RustEditor-Refactoring - Method New'
 }
 
 { #category : #utilities }
