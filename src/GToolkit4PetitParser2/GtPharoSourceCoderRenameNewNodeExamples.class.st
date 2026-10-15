@@ -29,6 +29,29 @@ GtPharoSourceCoderRenameNewNodeExamples >> newEditorElement [
 ]
 
 { #category : #examples }
+GtPharoSourceCoderRenameNewNodeExamples >> renameAtDoesNotInstallClassControllerWithOldImplementation [
+	<gtExample>
+	<return: #GtTextEditorElement>
+	| anExamples aCoder aViewModel anEditor aNode |
+	anExamples := GtPharoRenameClassCoderControllerExamples new.
+	aCoder := GtPharoMethodCoder forMethod: anExamples dummyThreeMethod.
+	aViewModel := aCoder asCoderViewModel.
+	anEditor := anExamples editorWithDummyThreeMethod.
+	aNode := anExamples dummyThreeClassNode.
+
+	self
+		withNewRenameImplementation: false
+		do: [ aCoder
+				renameAt: aNode startPosition + 1
+				in: aViewModel
+				documentId: nil
+				for: anEditor ].
+
+	self assert: (anEditor userData includesKey: #variableController) not.
+	^ anEditor
+]
+
+{ #category : #examples }
 GtPharoSourceCoderRenameNewNodeExamples >> renameAtDoesNotInstallClassVariableControllerWithOldImplementation [
 	<gtExample>
 	<return: #GtTextEditorElement>
@@ -93,6 +116,33 @@ GtPharoSourceCoderRenameNewNodeExamples >> renameAtDoesNotInstallPP2ControllerWi
 				for: anEditor ].
 
 	self assert: (anEditor userData includesKey: #variableController) not.
+	^ anEditor
+]
+
+{ #category : #examples }
+GtPharoSourceCoderRenameNewNodeExamples >> renameAtInstallsClassController [
+	<gtExample>
+	<return: #GtTextEditorElement>
+	| anExamples aCoder aViewModel anEditor aNode aController |
+	anExamples := GtPharoRenameClassCoderControllerExamples new.
+	aCoder := GtPharoMethodCoder forMethod: anExamples dummyThreeMethod.
+	aViewModel := aCoder asCoderViewModel.
+	anEditor := anExamples editorWithDummyThreeMethod.
+	aNode := anExamples dummyThreeClassNode.
+
+	self
+		withNewRenameImplementation: true
+		do: [ aCoder
+				renameAt: aNode startPosition + 1
+				in: aViewModel
+				documentId: nil
+				for: anEditor ].
+
+	aController := anEditor userData at: #variableController.
+	self assert: aController class equals: GtPharoRenameClassCoderController.
+	self
+		assert: (anEditor userData at: #variableModel) originalName
+		equals: 'GtPharoDummyThreeObject'.
 	^ anEditor
 ]
 
