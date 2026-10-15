@@ -29,6 +29,29 @@ GtPharoSourceCoderRenameNewNodeExamples >> newEditorElement [
 ]
 
 { #category : #examples }
+GtPharoSourceCoderRenameNewNodeExamples >> renameAtDoesNotInstallClassVariableControllerWithOldImplementation [
+	<gtExample>
+	<return: #GtTextEditorElement>
+	| anExamples aCoder aViewModel anEditor aNode |
+	anExamples := GtPharoRenameClassVariableCoderControllerExamples new.
+	aCoder := GtPharoMethodCoder forMethod: anExamples varAMethod.
+	aViewModel := aCoder asCoderViewModel.
+	anEditor := anExamples editorWithVarAMethod.
+	aNode := anExamples varAVariableNode.
+
+	self
+		withNewRenameImplementation: false
+		do: [ aCoder
+				renameAt: aNode startPosition + 1
+				in: aViewModel
+				documentId: nil
+				for: anEditor ].
+
+	self assert: (anEditor userData includesKey: #variableController) not.
+	^ anEditor
+]
+
+{ #category : #examples }
 GtPharoSourceCoderRenameNewNodeExamples >> renameAtDoesNotInstallInstanceVariableControllerWithOldImplementation [
 	<gtExample>
 	<return: #GtTextEditorElement>
@@ -70,6 +93,31 @@ GtPharoSourceCoderRenameNewNodeExamples >> renameAtDoesNotInstallPP2ControllerWi
 				for: anEditor ].
 
 	self assert: (anEditor userData includesKey: #variableController) not.
+	^ anEditor
+]
+
+{ #category : #examples }
+GtPharoSourceCoderRenameNewNodeExamples >> renameAtInstallsClassVariableController [
+	<gtExample>
+	<return: #GtTextEditorElement>
+	| anExamples aCoder aViewModel anEditor aNode aController |
+	anExamples := GtPharoRenameClassVariableCoderControllerExamples new.
+	aCoder := GtPharoMethodCoder forMethod: anExamples varAMethod.
+	aViewModel := aCoder asCoderViewModel.
+	anEditor := anExamples editorWithVarAMethod.
+	aNode := anExamples varAVariableNode.
+
+	self
+		withNewRenameImplementation: true
+		do: [ aCoder
+				renameAt: aNode startPosition + 1
+				in: aViewModel
+				documentId: nil
+				for: anEditor ].
+
+	aController := anEditor userData at: #variableController.
+	self assert: aController class equals: GtPharoRenameClassVariableCoderController.
+	self assert: (anEditor userData at: #variableModel) originalName equals: 'VarA'.
 	^ anEditor
 ]
 
