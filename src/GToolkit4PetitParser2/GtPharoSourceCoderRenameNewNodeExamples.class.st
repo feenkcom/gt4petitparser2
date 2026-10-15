@@ -120,6 +120,29 @@ GtPharoSourceCoderRenameNewNodeExamples >> renameAtDoesNotInstallPP2ControllerWi
 ]
 
 { #category : #examples }
+GtPharoSourceCoderRenameNewNodeExamples >> renameAtDoesNotInstallTemporaryControllerWithOldImplementation [
+	<gtExample>
+	<return: #GtTextEditorElement>
+	| anExamples aCoder aViewModel anEditor aNode |
+	anExamples := GtPharoRenameTemporaryCoderControllerExamples new.
+	aCoder := GtPharoMethodCoder forMethod: anExamples tempReceiverMethod.
+	aViewModel := aCoder asCoderViewModel.
+	anEditor := anExamples editorWithTempReceiverMethod.
+	aNode := anExamples temporaryNodeA.
+
+	self
+		withNewRenameImplementation: false
+		do: [ aCoder
+				renameAt: aNode startPosition
+				in: aViewModel
+				documentId: nil
+				for: anEditor ].
+
+	self assert: (anEditor userData includesKey: #variableController) not.
+	^ anEditor
+]
+
+{ #category : #examples }
 GtPharoSourceCoderRenameNewNodeExamples >> renameAtInstallsClassController [
 	<gtExample>
 	<return: #GtTextEditorElement>
@@ -224,6 +247,31 @@ GtPharoSourceCoderRenameNewNodeExamples >> renameAtInstallsPP2ControllerForVaria
 	self assert: aController class equals: GtPharoRenamePP2ProductionCoderController.
 	self assert: aController editorElement equals: anEditor.
 	self assert: (anEditor userData at: #variableModel) originalName equals: 'fieldName'.
+	^ anEditor
+]
+
+{ #category : #examples }
+GtPharoSourceCoderRenameNewNodeExamples >> renameAtInstallsTemporaryController [
+	<gtExample>
+	<return: #GtTextEditorElement>
+	| anExamples aCoder aViewModel anEditor aNode aController |
+	anExamples := GtPharoRenameTemporaryCoderControllerExamples new.
+	aCoder := GtPharoMethodCoder forMethod: anExamples tempReceiverMethod.
+	aViewModel := aCoder asCoderViewModel.
+	anEditor := anExamples editorWithTempReceiverMethod.
+	aNode := anExamples temporaryNodeA.
+
+	self
+		withNewRenameImplementation: true
+		do: [ aCoder
+				renameAt: aNode startPosition
+				in: aViewModel
+				documentId: nil
+				for: anEditor ].
+
+	aController := anEditor userData at: #variableController.
+	self assert: aController class equals: GtPharoRenameTemporaryCoderController.
+	self assert: (anEditor userData at: #variableModel) originalName equals: 'a'.
 	^ anEditor
 ]
 
