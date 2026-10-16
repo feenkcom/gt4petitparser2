@@ -13,5 +13,7 @@ BaselineOfGToolkit4PetitParser2 >> baseline: spec [
 				spec repository: 'github://feenkcom/petitparser2:2c35cb112d343e8b33e1fa0c6c822cee1940e110' ].
 
 		spec package: 'GToolkit4PetitParser2'.
+		spec package: 'GToolkit4PetitParser2-RustEditor' with: [
+			spec requires: #(#GToolkit4PetitParser2) ].
 	]
 ]
