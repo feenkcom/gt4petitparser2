@@ -4,6 +4,13 @@ Class {
 	#category : #'GToolkit4PetitParser2-Refactoring '
 }
 
+{ #category : #testing }
+GtPP2RenameController class >> isDeprecated [
+	"Replaced by {{gtClass:GtPharoRenamePP2ProductionCoderController}}, this implementation stays for clients that still depend on it."
+
+	^ true
+]
+
 { #category : #accessing }
 GtPP2RenameController class >> renameIn: aSourceCoderViewModel node: aNode [
 	<gtRenameMethodController>

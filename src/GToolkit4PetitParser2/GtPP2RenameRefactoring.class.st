@@ -26,7 +26,7 @@ GtPP2RenameRefactoring >> renameImplementors [
 		do: [ :each | 
 			(each directlyDefinesMethod: variableName asSymbol)
 				ifTrue: [ | ast |
-					ast := class parseTreeFor: variableName asSymbol.
+					ast := class parseTreeForSelector: variableName asSymbol.
 					ast ifNil: [ self refactoringFailure: 'Could not parse source code.' ].
 					ast renameSelector: newName asSymbol andArguments: #().
 					(each methodFor: variableName asSymbol) compileTree: ast ] ]
