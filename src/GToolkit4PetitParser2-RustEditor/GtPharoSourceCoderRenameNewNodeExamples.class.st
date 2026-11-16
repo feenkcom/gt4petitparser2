@@ -393,6 +393,32 @@ GtPharoSourceCoderRenameNewNodeExamples >> renameBaselineAtInstallsBaselineContr
 	^ anEditor
 ]
 
+{ #category : #'examples - rename' }
+GtPharoSourceCoderRenameNewNodeExamples >> renameExpressionKeywordAndParameterWithNext [
+	<gtExample>
+	| aModel |
+	aModel := self renameNewNodeWithExpressionArgument userData at: #selectorModel.
+	aModel swapSelectorPartAndParameterWithNext: 1 source: self.
+	self assert: aModel currentSelector equals: #b:sumA:.
+	self assert: aModel currentParameterPermutations equals: #(2 1).
+	self assert: aModel parameters first currentName equals: 'instA'.
+	self assert: aModel parameters second currentName equals: 'instA + 0'.
+	^ aModel
+]
+
+{ #category : #'examples - rename' }
+GtPharoSourceCoderRenameNewNodeExamples >> renameExpressionParameterWithNext [
+	<gtExample>
+	| aModel |
+	aModel := self renameNewNodeWithExpressionArgument userData at: #selectorModel.
+	aModel swapParameterWithNext: 1 source: self.
+	self assert: aModel currentSelector equals: #sumA:b:.
+	self assert: aModel currentParameterPermutations equals: #(2 1).
+	self assert: aModel parameters first currentName equals: 'instA'.
+	self assert: aModel parameters second currentName equals: 'instA + 0'.
+	^ aModel
+]
+
 { #category : #examples }
 GtPharoSourceCoderRenameNewNodeExamples >> renameMenuItemIsNotAddedForVariable [
 	<gtExample>
@@ -540,6 +566,40 @@ GtPharoSourceCoderRenameNewNodeExamples >> renameNewNodeKeepsSelectorController 
 	^ anEditor
 ]
 
+{ #category : #'examples - rename' }
+GtPharoSourceCoderRenameNewNodeExamples >> renameNewNodeWithExpressionArgument [
+	<gtExample>
+	| aSource anAst aMessageNode aCoder aViewModel anEditor aSelectorModel |
+	aSource := 'instAPlusOne
+	^ self sumA: instA + 0 b: instA'.
+	anAst := GtPharoParser parse: aSource.
+	anAst
+		allNodesDo: [ :each | 
+			(each isMessage and: [ each selector = #sumA:b: ])
+				ifTrue: [ aMessageNode := each ] ].
+	self assert: aMessageNode isNotNil.
+	aCoder := self instAPlusOneCoder.
+	aViewModel := aCoder asCoderViewModel.
+	anEditor := BrEditor new.
+	anEditor text: aSource asRopedText.
+	aCoder
+		renameNewNode: aMessageNode
+		in: aViewModel
+		documentId: nil
+		for: anEditor.
+	self assert: anEditor class equals: BrEditor.
+	self assert: (anEditor userData includesKey: #selectorModel).
+	aSelectorModel := anEditor userData at: #selectorModel.
+	self assert: aSelectorModel currentSelector equals: #sumA:b:.
+	self assert: aSelectorModel currentParameterPermutations equals: #(1 2).
+	self assert: aSelectorModel numberOfParameters equals: 2.
+	self assert: aSelectorModel parameters first originalIndex equals: 1.
+	self assert: aSelectorModel parameters first currentName equals: 'instA + 0'.
+	self assert: aSelectorModel parameters second originalIndex equals: 2.
+	self assert: aSelectorModel parameters second currentName equals: 'instA'.
+	^ anEditor
+]
+
 { #category : #examples }
 GtPharoSourceCoderRenameNewNodeExamples >> renamePackageAt: aNewImplementationBoolean [
 	| anExamples aCoder aViewModel anEditor aNode aResult |
@@ -621,6 +681,42 @@ GtPharoSourceCoderRenameNewNodeExamples >> renamePharoControllerWithoutApplicabl
 		equals: nil.
 	self assert: (aCoder renamePharoControllerIn: aViewModel for: aCoder astSync) equals: nil.
 	^ self
+]
+
+{ #category : #'examples - rename' }
+GtPharoSourceCoderRenameNewNodeExamples >> renameSelectorAttributesWithExpressionArgument [
+	<gtExample>
+	| anEditor aModel aStencil allAttributes |
+	anEditor := self renameNewNodeWithExpressionArgument.
+	aModel := anEditor userData at: #selectorModel.
+	aStencil := GtPharoRenameSelectorAttributesStencil new.
+	aStencil selectorModel: aModel.
+	allAttributes := aStencil create.
+	self assert: allAttributes size equals: 9.
+	self
+		assert: allAttributes first third class
+		equals: GtPharoRenameSelectorPartEditorAttribute.
+	self
+		assert: allAttributes second third class
+		equals: GtPharoRenameSelectorParameterLabelAttribute.
+	self
+		assert: allAttributes second first
+		equals: aModel parameters first originalInterval first.
+	self
+		assert: allAttributes second second
+		equals: aModel parameters first originalInterval last.
+	self
+		assert: (allAttributes
+				count: [ :each | each third isKindOf: GtPharoRenameSelectorSwapButtonAttribute ])
+		equals: 4.
+	self
+		assert: (allAttributes
+				count: [ :each | each third isKindOf: GtPharoRenameSelectorParameterLabelAttribute ])
+		equals: 2.
+	self
+		assert: allAttributes last third class
+		equals: GtPharoRenameSelectorRefactoringsPreviewAttribute.
+	^ aStencil
 ]
 
 { #category : #utilities }
