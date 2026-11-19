@@ -18,7 +18,7 @@ GtPharoRenamePP2ProductionCoderController class >> isApplicableIn: aSourceCoderV
 		ifFalse: [ ^ false ].
 	aName := self productionNameOf: aNode.
 	aName ifNil: [ ^ false ].
-	(aBehavior allInstVarNames includes: aName) ifFalse: [ ^ false ].
+	(aBehavior allInstVarNames includes: aName asSymbol) ifFalse: [ ^ false ].
 	^ self isProductionNode: aNode named: aName
 ]
 
