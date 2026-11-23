@@ -35,7 +35,7 @@ GtPharoSourceCoder >> inlineProduction: anAst to: coderAddOns from: aCoderViewMo
 	(self nodeFrom: aCoderViewModel)
 		ifNotNil: [ :node | 
 			node isVariable ifFalse: [ ^ self ].
-			(aCoderViewModel behavior allInstVarNames includes: node source)
+			(aCoderViewModel behavior allInstVarNames includes: node variableName)
 				ifFalse: [ ^ self ].
 			(aCoderViewModel behavior whichClassIncludesSelector: node source asSymbol)
 				ifNil: [ ^ self ].
