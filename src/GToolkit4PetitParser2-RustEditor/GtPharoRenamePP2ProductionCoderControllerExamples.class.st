@@ -174,10 +174,10 @@ GtPharoRenamePP2ProductionCoderControllerExamples >> installedController_refacto
 	aModelClass := aRefactoring model classFor: BibtexPParser.
 	self assert: (aModelClass directlyDefinesMethod: #fieldTitle).
 	self assert: (aModelClass directlyDefinesMethod: #fieldName) not.
-	self assert: (aModelClass instanceVariableNames includes: 'fieldTitle').
+	self assert: (aModelClass instanceVariableNames includes: #fieldTitle).
 	self assert: ((aModelClass sourceCodeFor: #field) includesSubstring: 'fieldTitle trim').
 
 	self assert: (BibtexPParser includesSelector: #fieldName).
-	self assert: (BibtexPParser instVarNames includes: 'fieldName').
+	self assert: (BibtexPParser instVarNames includes: #fieldName).
 	^ aController
 ]
